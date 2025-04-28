@@ -9,8 +9,8 @@ namespace PlaidApi.Controllers
     public class PlaidController : ControllerBase
     {
         // TODO: Coloca tus credenciales reales aquí o usa IConfiguration para mayor seguridad
-        private readonly string clientId = "631b6a91e93a3f001414f109";
-        private readonly string secret = "679f5277a2b1806423fc309372ca8e";
+        private readonly string clientId = "";
+        private readonly string secret = "";
         private readonly string plaidEnv = "sandbox"; // o "development" o "production"
 
         private IPlaidApi GetPlaidApi() =>

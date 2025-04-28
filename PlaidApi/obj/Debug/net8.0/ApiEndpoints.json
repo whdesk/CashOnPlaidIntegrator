@@ -1,0 +1,108 @@
+[
+  {
+    "ContainingType": "PlaidApi.Controllers.PibisiController",
+    "Method": "ValidarCliente",
+    "RelativePath": "api/pibisi/validar-cliente",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "PlaidApi.Pibisi.PibisiCustomerRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PlaidApi.Controllers.PlaidController",
+    "Method": "ExchangePublicToken",
+    "RelativePath": "api/Plaid/exchange-public-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "publicToken",
+        "Type": "PlaidApi.Plaid.AccessTokenRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PlaidApi.Controllers.PlaidController",
+    "Method": "GetLinkToken",
+    "RelativePath": "api/Plaid/link-token",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PlaidApi.Controllers.StripePaymentController",
+    "Method": "AttachPaymentMethod",
+    "RelativePath": "api/stripe/attach-payment-method",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PlaidApi.Controllers.AttachPaymentMethodRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PlaidApi.Controllers.StripePaymentController",
+    "Method": "ChargeOffSession",
+    "RelativePath": "api/stripe/charge-off-session",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PlaidApi.Controllers.ChargeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PlaidApi.Controllers.StripePaymentController",
+    "Method": "CreateCustomer",
+    "RelativePath": "api/stripe/create-customer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PlaidApi.Controllers.CreateCustomerRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PlaidApi.Controllers.StripePaymentController",
+    "Method": "GetPaymentMethods",
+    "RelativePath": "api/stripe/payment-methods",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

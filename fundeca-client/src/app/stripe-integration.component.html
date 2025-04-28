@@ -1,0 +1,40 @@
+<div class="stripe-integration">
+  <div class="payment-methods-box">
+    <div class="header">
+      <span>Método de pago</span>
+      <a href="#" (click)="onAddPaymentMethod()">Agregar</a>
+    </div>
+    <div *ngFor="let method of paymentMethods" class="method-row">
+      <input type="radio" name="selectedMethod" [checked]="selectedPaymentMethodId === method.id" (change)="selectPaymentMethod(method.id)">
+      <span class="icon-card">💳</span>
+      <span>**** {{ method.last4 }}</span>
+      <span class="expira">Vence {{ method.exp_month | number:'2.0' }}/{{ method.exp_year | number:'2.0' | slice:-2 }}</span>
+      <span class="edit-icon" (click)="onEditPaymentMethod(method)">✏️</span>
+    </div>
+    <button class="pay-btn" [disabled]="!selectedPaymentMethodId" (click)="chargeCustomer()">Realizar pago</button>
+  </div>
+
+  <h2>Integración Stripe: Customer, Método de Pago y Cobro</h2>
+  <form (submit)="$event.preventDefault()">
+    <label>Email:</label>
+    <input type="email" [(ngModel)]="stripeEmail" name="stripeEmail" required>
+    <label>Nombre:</label>
+    <input type="text" [(ngModel)]="stripeName" name="stripeName" required>
+    <button type="button" (click)="createStripeCustomer()" [disabled]="loading">Crear Cliente</button>
+  </form>
+  <div>
+    <h3>Método de Pago</h3>
+    <div id="card-element" style="min-height:56px; padding:8px; background:#fff; border-radius:4px; border:1px solid #ccc;"></div>
+    <button type="button" (click)="saveCardAndAttachToCustomer()" [disabled]="loading || !cardElement">Guardar Método de Pago</button>
+  </div>
+  <div>
+    <h3>Cobro Automático</h3>
+    <button type="button" (click)="chargeCustomer()" [disabled]="loading">Cobrar Automático</button>
+  </div>
+  
+  <div *ngIf="loading">Procesando...</div>
+</div>
+
+  
+
+

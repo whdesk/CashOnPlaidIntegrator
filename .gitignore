@@ -1,0 +1,60 @@
+# .gitignore para proyectos .NET y Angular (monorepo)
+
+# Archivos y carpetas de Visual Studio/.NET
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+bin/
+obj/
+*.dbmdl
+*.log
+*.pdb
+*.cache
+*.ide
+*.sdf
+*.opensdf
+*.v12.suo
+*.DS_Store
+
+# Archivos de configuración de usuario
+*.swp
+*.bak
+*.tmp
+*.localhistory
+
+# Archivos de paquetes NuGet
+*.nupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Secretos y configuraciones sensibles
+appsettings.*.json
+!appsettings.json
+secrets.json
+.env
+.env.*
+
+# Archivos y carpetas de Node.js/Angular
+fundeca-client/node_modules/
+fundeca-client/dist/
+fundeca-client/.angular/cache/
+fundeca-client/.angular/*
+fundeca-client/.env*
+
+# Archivos del sistema
+Thumbs.db
+Desktop.ini
+
+# Archivos de logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Otros
+bfg-*.jar

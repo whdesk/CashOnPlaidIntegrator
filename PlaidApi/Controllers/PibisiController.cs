@@ -13,7 +13,7 @@ namespace PlaidApi.Controllers
         public async Task<IActionResult> ValidarCliente([FromBody] PibisiCustomerRequest req)
         {
             // TODO: Reemplaza estos valores por los reales o usa IConfiguration
-            var authToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyLmluaXRpdW1AcGliaXNpLmNvbSIsImlzcyI6IlBpYmlzaSBBcHAiLCJpYXQiOjE3NDM1OTM5ODcsImVuZHBvaW50IjoiaHR0cHM6Ly9pbnQuYXBpLnBpYmlzaS5jb20ifQ.0-xlo0AkX_E4k97bBMWPj2Y1FTqE_xdNj7PIrAzZf_c";
+            var authToken = "";
 
             try
             {

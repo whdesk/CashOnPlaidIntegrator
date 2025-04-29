@@ -12,8 +12,12 @@ namespace PlaidApi.Controllers
         [HttpPost("validar-cliente")]
         public async Task<IActionResult> ValidarCliente([FromBody] PibisiCustomerRequest req)
         {
-            // TODO: Reemplaza estos valores por los reales o usa IConfiguration
-            var authToken = "";
+            // Obtener el token de autenticación desde una variable de entorno
+            var authToken = Environment.GetEnvironmentVariable("PIBISI_AUTH_TOKEN");
+            if (string.IsNullOrWhiteSpace(authToken))
+            {
+                throw new InvalidOperationException("El token de autenticación de PIBISI no está definido en la variable de entorno PIBISI_AUTH_TOKEN.");
+            }
 
             try
             {

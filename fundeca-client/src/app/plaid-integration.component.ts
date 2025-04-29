@@ -8,6 +8,9 @@ import { StripeIntegrationService } from './stripe-integration.service';
   styleUrl: './plaid-integration.component.scss'
 })
 export class PlaidIntegrationComponent implements OnInit {
+  city: string = '';
+  zipCode: string = '';
+
   plaidLinkToken: string | null = null;
   private plaidHandler: any;
   loading = false;
@@ -103,25 +106,27 @@ export class PlaidIntegrationComponent implements OnInit {
   }
 
   // --- Validación de cliente con Pibisi ---
-async validarClienteConPibisi() {
-  // Ejemplo de datos, puedes reemplazarlos por los del formulario real
-  const payload = {
-    personType: 'P', // 'P' para persona natural, 'E' para jurídica
-    fullName: 'Juan Perez',
-    nationalId: 'V12345678',
-    birthDate: '1980-01-01'
-  };
-  try {
-    const res = await fetch('http://localhost:5199/api/pibisi/validar-cliente', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    console.log('Respuesta de validación Pibisi:', data);
-    alert('Resultado validación Pibisi:\n' + JSON.stringify(data, null, 2));
-  } catch (error) {
-    alert('Error al validar cliente en Pibisi: ' + error);
+  async validarClienteConPibisi() {
+    // Ejemplo de datos básicos para el registro y validación (nuevo formato)
+    const payload = {
+      Country: 'ESP', // País del documento
+      NationalId: '00000000T', // NIF válido para pruebas
+      FullName: 'Juan Perez',
+      BirthDate: '1980-01-01',
+      City: 'Madrid',
+      ZipCode: '28013'
+    };
+    try {
+      const res = await fetch('http://localhost:5199/api/pibisi/validar-cliente', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      console.log('Respuesta de validación Pibisi:', data);
+      alert('Resultado validación Pibisi:\n' + JSON.stringify(data, null, 2));
+    } catch (error) {
+      alert('Error al validar cliente en Pibisi: ' + error);
+    }
   }
-}
 }

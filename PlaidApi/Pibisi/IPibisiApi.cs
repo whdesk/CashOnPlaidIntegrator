@@ -9,17 +9,19 @@ namespace PlaidApi.Pibisi
         Task<string> GetCredentials([Header("X-AUTH-TOKEN")] string authToken);
 
         [Get("/users/me/accounts")]
-        Task<string> GetAccounts([Header("X-AUTH-TOKEN")] string authToken);
+        Task<PibisiAccountsResponse> GetAccounts([Header("X-AUTH-TOKEN")] string authToken);
 
-        //[Multipart]
-        //[Post("/accounts/{account}/customers/")]
-        //Task<PibisiCustomerResponse> RegisterCustomer(
-        //    [Header("X-AUTH-TOKEN")] string authToken,
-        //    [AliasAs("person")] string personType,
-        //    [AliasAs("name.full")] string fullName,
-        //    [AliasAs("id.national")] string nationalId,
-        //    [AliasAs("birth.date")] string birthDate
-        //    // Agrega otros campos si lo necesitas
-        //);
+        [Headers("Content-Type: application/x-www-form-urlencoded")]
+        [Post("/accounts/{account}/customers")]
+        Task<PibisiCustomerResponse> RegisterCustomer(
+            [AliasAs("account")] string accountId,
+            [Body(BodySerializationMethod.UrlEncoded)] PibisiCustomerFormData formData
+        );
+
+        [Get("/accounts/{account}/customers/{customer}")]
+        Task<PibisiCustomerResponse> GetCustomer(
+            [AliasAs("account")] string accountId,
+            [AliasAs("customer")] string customer
+        );
     }
 }

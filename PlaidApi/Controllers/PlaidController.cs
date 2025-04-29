@@ -8,10 +8,26 @@ namespace PlaidApi.Controllers
     [Route("api/[controller]")]
     public class PlaidController : ControllerBase
     {
-        // TODO: Coloca tus credenciales reales aquí o usa IConfiguration para mayor seguridad
-        private readonly string clientId = "";
-        private readonly string secret = "";
-        private readonly string plaidEnv = "sandbox"; // o "development" o "production"
+        private readonly IConfiguration _config;
+        private readonly string clientId;
+        private readonly string secret;
+        private readonly string plaidEnv;
+        public PlaidController(IConfiguration config)
+        {
+            _config = config;
+            clientId = _config["PLAID_CLIENT_ID"];
+            secret = _config["PLAID_SECRET"];
+            plaidEnv = _config["PLAID_ENVIRONMENT"] ?? "sandbox";
+        }
+        private void VerificarCredenciales()
+        {
+            if (string.IsNullOrWhiteSpace(clientId))
+                throw new InvalidOperationException("La variable PLAID_CLIENT_ID no está definida en los secretos de usuario ni en la configuración.");
+            if (string.IsNullOrWhiteSpace(secret))
+                throw new InvalidOperationException("La variable PLAID_SECRET no está definida en los secretos de usuario ni en la configuración.");
+            if (string.IsNullOrWhiteSpace(plaidEnv))
+                throw new InvalidOperationException("La variable PLAID_ENVIRONMENT no está definida en los secretos de usuario ni en la configuración.");
+        }
 
         private IPlaidApi GetPlaidApi() =>
             RestService.For<IPlaidApi>($"https://{plaidEnv}.plaid.com");
@@ -19,6 +35,7 @@ namespace PlaidApi.Controllers
         [HttpGet("link-token")]
         public async Task<IActionResult> GetLinkToken()
         {
+            VerificarCredenciales();
             var plaid = GetPlaidApi();
             var request = new PlaidLinkTokenRequest
             {
@@ -37,6 +54,7 @@ namespace PlaidApi.Controllers
         [HttpPost("exchange-public-token")]
         public async Task<IActionResult> ExchangePublicToken([FromBody] AccessTokenRequestDto publicToken)
         {
+            VerificarCredenciales();
             var plaid = GetPlaidApi();
             var plaidExchangeTokenRequest = new PlaidExchangeTokenRequest
             {

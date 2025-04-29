@@ -8,12 +8,14 @@ namespace PlaidApi.Controllers
     [Route("api/stripe")]
     public class StripePaymentController : ControllerBase
     {
-        public StripePaymentController()
+        private readonly IConfiguration _config;
+        public StripePaymentController(IConfiguration config)
         {
-            var stripeApiKey = Environment.GetEnvironmentVariable("STRIPE_SECRET_KEY");
+            _config = config;
+            var stripeApiKey = _config["STRIPE_SECRET_KEY"];
             if (string.IsNullOrWhiteSpace(stripeApiKey))
             {
-                throw new InvalidOperationException("La clave secreta de Stripe no está definida en la variable de entorno STRIPE_SECRET_KEY.");
+                throw new InvalidOperationException("La clave secreta de Stripe no está definida en los secretos de usuario ni en la configuración.");
             }
             StripeConfiguration.ApiKey = stripeApiKey;
         }

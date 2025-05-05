@@ -66,7 +66,7 @@ namespace PlaidApi.Controllers
 
             var response = await plaid.ExchangePublicToken(plaidExchangeTokenRequest);
 
-            // Verificar identidad
+            // Verificar identidad (para comprobar si algunos datos de la cuenta son falsos o no coinciden con el registro)
             var requestIdentity = new PlaidApi.Plaid.PlaidIdentityRequest
             {
                 access_token = response.access_token,
@@ -74,6 +74,15 @@ namespace PlaidApi.Controllers
                 secret = secret
             };
             var identity = await plaid.GetIdentity(requestIdentity);
+
+            //para obtener los datos de la cuenta bancaria
+            var ath = new PlaidApi.Plaid.PlaidAuthRequest
+            {
+                access_token = response.access_token,
+                client_id = clientId,
+                secret = secret
+            };
+            var accounts = await plaid.GetAuth(ath);
 
             // Obtener todas las transacciones de los últimos 90 días (con paginación)
             var endDate = System.DateTime.UtcNow.Date;
@@ -118,16 +127,18 @@ namespace PlaidApi.Controllers
             var ingresosRecurrentes = allTransactions.Where(t =>
                      (PaymentCapacityRules.IngresosRecurrentes.Contains(t.personal_finance_category.detailed) &&
                      !PaymentCapacityRules.TransferenciasExcluir.Contains(t.personal_finance_category.detailed) &&
-                     t.amount < 0) || t.amount < 0).Select(txn => Math.Abs(txn.amount)).ToList().Average();
+                     t.amount < 0) || t.amount < 0).Select(txn => Math.Abs(txn.amount)).ToList();
 
             //promedio egresos recurrentes
             var egresosRecurrentes = allTransactions.Where(t =>
                      (PaymentCapacityRules.EgresosRecurrentes.Contains(t.personal_finance_category.detailed) &&
                      !PaymentCapacityRules.EgresosVariablesExcluir.Contains(t.personal_finance_category.detailed) &&
-                     t.amount > 0) || t.amount > 0).Select(txn => txn.amount).ToList().Average();
+                     t.amount > 0) || t.amount > 0).Select(txn => txn.amount).ToList();
+             
+            var promedioIngresos = ingresosRecurrentes.Average();
+            var promedioEgresos = egresosRecurrentes.Average();
 
-
-            decimal ratio = egresosRecurrentes > 0 ? ingresosRecurrentes / egresosRecurrentes : 0;
+            decimal ratio = promedioIngresos > 0 ? promedioEgresos / promedioIngresos : 0;
 
             // Determinar nivel de capacidad
             PaymentCapacityRules.PaymentCapacityLevel nivelCapacidad = PaymentCapacityRules.GetPaymentCapacityLevel(ratio);

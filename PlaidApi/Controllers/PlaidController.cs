@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PlaidApi.Constants;
 using PlaidApi.Plaid;
 using Refit;
 
@@ -42,7 +43,7 @@ namespace PlaidApi.Controllers
                 client_id = clientId,
                 secret = secret,
                 client_name = "Plaid Angular App",
-                user = new { client_user_id = "user-123" },
+                user = new { client_user_id = "custom_large" },
                 products = ["auth", "identity", "transactions"],
                 country_codes = ["ES"],
                 language = "es"
@@ -65,131 +66,85 @@ namespace PlaidApi.Controllers
 
             var response = await plaid.ExchangePublicToken(plaidExchangeTokenRequest);
 
-            var auth = new PlaidApi.Plaid.PlaidAuthRequest
-            {
-                access_token = response.access_token,
-                client_id = clientId,
-                secret = secret
-            };
-
-            var authResponse = await plaid.GetAuth(auth);
-
+            // Verificar identidad
             var requestIdentity = new PlaidApi.Plaid.PlaidIdentityRequest
             {
                 access_token = response.access_token,
                 client_id = clientId,
                 secret = secret
             };
-
             var identity = await plaid.GetIdentity(requestIdentity);
 
-
-            // Calcular fechas de los últimos 3 meses
+            // Obtener todas las transacciones de los últimos 90 días (con paginación)
             var endDate = System.DateTime.UtcNow.Date;
-            var startDate = endDate.AddMonths(-3);
-
-            // Paginación para obtener todas las transacciones de los últimos 3 meses
+            var startDate = endDate.AddDays(-90);
             var allTransactions = new List<PlaidApi.Plaid.Transaction>();
-            int totalTransactions = 0;
-            int count = 500; // máximo permitido por Plaid
             int offset = 0;
-            PlaidApi.Plaid.PlaidTransactionsResponse transactionResponse = null;
+            int total = 0;
 
-            var transactions2 = new PlaidApi.Plaid.PlaidTransactionsRequest
+            do
             {
-                access_token = response.access_token,
-                client_id = clientId,
-                secret = secret,
-                start_date = startDate.ToString("yyyy-MM-dd"),
-                end_date = endDate.ToString("yyyy-MM-dd"),
-                options = new PlaidApi.Plaid.Options { count = count, offset = offset }
-            };
-
-            var transactionResponse2= await plaid.GetTransactions2(transactions2);
-            try
-            {
-                while (true)
+                var transactionsRequest = new PlaidApi.Plaid.PlaidTransactionsRequest
                 {
-                    var transactions = new PlaidApi.Plaid.PlaidTransactionsRequest
-                    {
-                        access_token = response.access_token,
-                        client_id = clientId,
-                        secret = secret,
-                        start_date = startDate.ToString("yyyy-MM-dd"),
-                        end_date = endDate.ToString("yyyy-MM-dd"),
-                        options = new PlaidApi.Plaid.Options { count = count, offset = offset }
-                    };
+                    access_token = response.access_token,
+                    client_id = clientId,
+                    secret = secret,
+                    start_date = startDate.ToString("yyyy-MM-dd"),
+                    end_date = endDate.ToString("yyyy-MM-dd"),
+                    options = new Options { count = 500, offset = offset }
+                };
 
-                    transactionResponse = await plaid.GetTransactions(transactions);
-                    if (transactionResponse?.transactions != null)
+                try
+                {
+                    var transactionResponse = await plaid.GetTransactions(transactionsRequest) ?? throw new Exception("Respuesta nula de la API de Plaid");
+                    if (transactionResponse.transactions != null)
+                    {
                         allTransactions.AddRange(transactionResponse.transactions);
-
-                    totalTransactions = transactionResponse?.total_transactions ?? 0;
-                    offset += count;
-
-                    if (allTransactions.Count >= totalTransactions || transactionResponse?.transactions == null || transactionResponse.transactions.Length == 0)
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al obtener transacciones: {ex.Message}");
-
-            }
-
-
-            // Procesar ingresos y egresos de forma robusta usando categorías
-            var ingresos = 0.0M;
-            var egresos = 0.0M;
-            if (allTransactions != null)
-            {
-                // Categorías típicas de ingreso y egreso
-                var categoriasIngreso = new[] { "Deposit", "Payroll", "Refund", "Interest" };
-                var categoriasEgreso = new[] { "Payment", "Purchase", "Transfer", "Withdrawal" };
-
-                foreach (var txn in allTransactions)
-                {
-                    bool isIngreso = false;
-                    bool isEgreso = false;
-                    var catArray = txn.category ?? [];
-                    var catString = string.Join(" ", catArray);
-
-                    if (txn.amount < 0)
-                        isIngreso = true;
-                    else if (txn.amount > 0)
-                    {
-                        // Si la categoría contiene alguna palabra clave de ingreso
-                        if (categoriasIngreso.Any(ci => catString.Contains(ci, System.StringComparison.OrdinalIgnoreCase)))
-                            isIngreso = true;
-                        // Si la categoría contiene alguna palabra clave de egreso
-                        else if (categoriasEgreso.Any(ce => catString.Contains(ce, System.StringComparison.OrdinalIgnoreCase)))
-                            isEgreso = true;
-                        else
-                            isEgreso = true; // Por defecto, positivos son egreso
+                        total = transactionResponse.total_transactions;
+                        offset += transactionResponse.transactions.Length;
                     }
-
-                    if (isIngreso)
-                        ingresos += System.Math.Abs(txn.amount);
-                    if (isEgreso)
-                        egresos += System.Math.Abs(txn.amount);
+                    else
+                    {
+                        throw new Exception("Lista de transacciones nula en la respuesta");
+                    }
                 }
-            }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Error al obtener transacciones: {ex.Message}", ex);
+                }
+            } while (allTransactions.Count < total);
 
+            //promedio ingresos recurrentes
+            var ingresosRecurrentes = allTransactions.Where(t =>
+                     (PaymentCapacityRules.IngresosRecurrentes.Contains(t.personal_finance_category.detailed) &&
+                     !PaymentCapacityRules.TransferenciasExcluir.Contains(t.personal_finance_category.detailed) &&
+                     t.amount < 0) || t.amount < 0).Select(txn => Math.Abs(txn.amount)).ToList().Average();
+
+            //promedio egresos recurrentes
+            var egresosRecurrentes = allTransactions.Where(t =>
+                     (PaymentCapacityRules.EgresosRecurrentes.Contains(t.personal_finance_category.detailed) &&
+                     !PaymentCapacityRules.EgresosVariablesExcluir.Contains(t.personal_finance_category.detailed) &&
+                     t.amount > 0) || t.amount > 0).Select(txn => txn.amount).ToList().Average();
+
+
+            decimal ratio = egresosRecurrentes > 0 ? ingresosRecurrentes / egresosRecurrentes : 0;
+
+            // Determinar nivel de capacidad
+            PaymentCapacityRules.PaymentCapacityLevel nivelCapacidad = PaymentCapacityRules.GetPaymentCapacityLevel(ratio);
+
+            // Crear resumen
             var resumen = new
             {
-                ingresos,
-                egresos,
-                mas_egresos_que_ingresos = egresos > ingresos
+                ratioCapacidadPago = ratio,
+                nivelCapacidad = nivelCapacidad,
+                mensaje = nivelCapacidad == PaymentCapacityRules.PaymentCapacityLevel.Buena
+                    ? "Felicitaciones. Préstamo otorgado. Queremos que tu experiencia sea lo más sencilla posible. Si ingresas los datos de tu tarjeta, podremos hacer el cobro automáticamente en la fecha de pago. Sin complicaciones, sin recordatorios, sin estrés."
+                    : nivelCapacidad == PaymentCapacityRules.PaymentCapacityLevel.Aceptable
+                    ? "Felicitaciones. Préstamo otorgado. Queremos que tu experiencia sea lo más sencilla posible. Si ingresas los datos de tu tarjeta, podremos hacer el cobro automáticamente en la fecha de pago. Sin complicaciones, sin recordatorios, sin estrés."
+                    : "ALERTAS: No hemos podido avanzar con tu solicitud debido a criterios internos relacionados con tu capacidad de pago."
             };
 
             return Ok(new { plaid = response, resumen, transacciones = allTransactions });
         }
     }
-
-    public class PublicTokenRequest
-    {
-        public string public_token { get; set; }
-    }
-
-
 }

@@ -6,8 +6,14 @@
     <UserSecretsId>dc7abddd-ae6e-493a-87c6-0262d0fdce22</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Services\PaymentCapacityService.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Refit" Version="8.0.0" />
     <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
     <PackageReference Include="Stripe.net" Version="48.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,87 @@
+{
+  "seed": "low-income-seed",
+  "override_accounts": [
+    {
+      "type": "depository",
+      "subtype": "checking",
+      "starting_balance": 0,
+      "meta": {
+        "name": "Cuenta Corriente",
+        "official_name": "Cuenta Corriente"
+      },
+      "numbers": {
+        "account": "0200051336",
+        "international_bic": "BSCHESMMXXX",
+        "international_iban": "ES9121000418450200051336"
+      },
+      "identity": {
+        "names": [
+          "Luis Pérez"
+        ],
+        "phone_numbers": [
+          {
+            "data": "+34654321099",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "emails": [
+          {
+            "data": "luis.perez@example.com",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "addresses": [
+          {
+            "data": {
+              "city": "Barcelona",
+              "country": "ES",
+              "postal_code": "08001",
+              "region": "Cataluña",
+              "street": "Carrer de la Pau, 45"
+            },
+            "primary": true
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2025-02-01",
+          "date_posted": "2025-02-01",
+          "currency": "EUR",
+          "amount": 50.00,
+          "description": "COMIDA"
+        },
+        {
+          "date_transacted": "2025-02-05",
+          "date_posted": "2025-02-05",
+          "currency": "EUR",
+          "amount": 30.00,
+          "description": "COMIDA"
+        },
+        {
+          "date_transacted": "2025-02-10",
+          "date_posted": "2025-02-10",
+          "currency": "EUR",
+          "amount": -100.00,
+          "description": "AYUDA SOCIAL"
+        },
+        {
+          "date_transacted": "2025-02-15",
+          "date_posted": "2025-02-15",
+          "currency": "EUR",
+          "amount": 40.00,
+          "description": "COMIDA"
+        },
+        {
+          "date_transacted": "2025-02-20",
+          "date_posted": "2025-02-20",
+          "currency": "EUR",
+          "amount": 25.00,
+          "description": "COMIDA"
+        }
+      ]
+    }
+  ]
+}

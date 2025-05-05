@@ -1,0 +1,471 @@
+{
+  "seed": "my-seed-string-3",
+  "override_accounts": [
+    {
+      "type": "depository",
+      "subtype": "checking",
+      "starting_balance": 6543.23,
+      "meta": {
+        "name": "Cuenta Corriente Fundeca",
+        "official_name": "Cuenta Corriente Instantánea Fundeca"
+      },
+      "numbers": {
+        "account": "0200051332",
+        "international_bic": "BSCHESMMXXX",
+        "international_iban": "ES9121000418450200051332"
+      },
+      "identity": {
+        "names": [
+          "Juan García López"
+        ],
+        "phone_numbers": [
+          {
+            "data": "+34654321098",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "emails": [
+          {
+            "data": "juan.garcia@example.com",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "addresses": [
+          {
+            "data": {
+              "city": "Madrid",
+              "country": "ES",
+              "postal_code": "28001",
+              "region": "Madrid",
+              "street": "Calle Mayor, 123"
+            },
+            "primary": true
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2025-02-01",
+          "date_posted": "2025-02-01",
+          "currency": "EUR",
+          "amount": 750.00,
+          "description": "ALQUILER VIVIENDA"
+        },
+        {
+          "date_transacted": "2025-02-05",
+          "date_posted": "2025-02-05",
+          "currency": "EUR",
+          "amount": -12.99,
+          "description": "SUSCRIPCION SPOTIFY"
+        },
+        {
+          "date_transacted": "2025-02-10",
+          "date_posted": "2025-02-10",
+          "currency": "EUR",
+          "amount": 65.00,
+          "description": "COMBUSTIBLE"
+        },
+        {
+          "date_transacted": "2025-02-15",
+          "date_posted": "2025-02-15",
+          "currency": "EUR",
+          "amount": 35.00,
+          "description": "COMIDA RAPIDA"
+        },
+        {
+          "date_transacted": "2025-02-20",
+          "date_posted": "2025-02-20",
+          "currency": "EUR",
+          "amount": 95.00,
+          "description": "SUPERMERCADO"
+        },
+        {
+          "date_transacted": "2025-02-15",
+          "date_posted": "2025-02-15",
+          "currency": "EUR",
+          "amount": -2500.00,
+          "description": "SALARIO EMPRESA"
+        },
+        {
+          "date_transacted": "2025-02-28",
+          "date_posted": "2025-02-28",
+          "currency": "EUR",
+          "amount": -1200.00,
+          "description": "INGRESO FREELANCE"
+        },
+        {
+          "date_transacted": "2025-02-01",
+          "date_posted": "2025-02-01",
+          "currency": "EUR",
+          "amount": 150.00,
+          "description": "PAGO TARJETA CREDITO"
+        },
+        {
+          "date_transacted": "2025-02-05",
+          "date_posted": "2025-02-05",
+          "currency": "EUR",
+          "amount": 80.00,
+          "description": "SEGURO AUTO"
+        },
+        {
+          "date_transacted": "2025-02-10",
+          "date_posted": "2025-02-10",
+          "currency": "EUR",
+          "amount": 45.00,
+          "description": "SEGURO VIDA"
+        },
+        {
+          "date_transacted": "2025-02-15",
+          "date_posted": "2025-02-15",
+          "currency": "EUR",
+          "amount": 120.00,
+          "description": "CUOTA HIPOTECA"
+        },
+        {
+          "date_transacted": "2025-02-20",
+          "date_posted": "2025-02-20",
+          "currency": "EUR",
+          "amount": 50.00,
+          "description": "CUOTA PRESTAMO PERSONAL"
+        },
+        {
+          "date_transacted": "2025-03-01",
+          "date_posted": "2025-03-01",
+          "currency": "EUR",
+          "amount": 750.00,
+          "description": "ALQUILER VIVIENDA"
+        },
+        {
+          "date_transacted": "2025-03-05",
+          "date_posted": "2025-03-05",
+          "currency": "EUR",
+          "amount": -12.99,
+          "description": "SUSCRIPCION SPOTIFY"
+        },
+        {
+          "date_transacted": "2025-03-10",
+          "date_posted": "2025-03-10",
+          "currency": "EUR",
+          "amount": 65.00,
+          "description": "COMBUSTIBLE"
+        },
+        {
+          "date_transacted": "2025-03-15",
+          "date_posted": "2025-03-15",
+          "currency": "EUR",
+          "amount": 35.00,
+          "description": "COMIDA RAPIDA"
+        },
+        {
+          "date_transacted": "2025-03-20",
+          "date_posted": "2025-03-20",
+          "currency": "EUR",
+          "amount": 95.00,
+          "description": "SUPERMERCADO"
+        },
+        {
+          "date_transacted": "2025-03-15",
+          "date_posted": "2025-03-15",
+          "currency": "EUR",
+          "amount": -2500.00,
+          "description": "SALARIO EMPRESA"
+        },
+        {
+          "date_transacted": "2025-03-31",
+          "date_posted": "2025-03-31",
+          "currency": "EUR",
+          "amount": -1200.00,
+          "description": "INGRESO FREELANCE"
+        },
+        {
+          "date_transacted": "2025-03-01",
+          "date_posted": "2025-03-01",
+          "currency": "EUR",
+          "amount": 150.00,
+          "description": "PAGO TARJETA CREDITO"
+        },
+        {
+          "date_transacted": "2025-03-05",
+          "date_posted": "2025-03-05",
+          "currency": "EUR",
+          "amount": 80.00,
+          "description": "SEGURO AUTO"
+        },
+        {
+          "date_transacted": "2025-03-10",
+          "date_posted": "2025-03-10",
+          "currency": "EUR",
+          "amount": 45.00,
+          "description": "SEGURO VIDA"
+        },
+        {
+          "date_transacted": "2025-03-15",
+          "date_posted": "2025-03-15",
+          "currency": "EUR",
+          "amount": 120.00,
+          "description": "CUOTA HIPOTECA"
+        },
+        {
+          "date_transacted": "2025-03-20",
+          "date_posted": "2025-03-20",
+          "currency": "EUR",
+          "amount": 50.00,
+          "description": "CUOTA PRESTAMO PERSONAL"
+        },
+        {
+          "date_transacted": "2025-04-01",
+          "date_posted": "2025-04-01",
+          "currency": "EUR",
+          "amount": 750.00,
+          "description": "ALQUILER VIVIENDA"
+        },
+        {
+          "date_transacted": "2025-04-05",
+          "date_posted": "2025-04-05",
+          "currency": "EUR",
+          "amount": -12.99,
+          "description": "SUSCRIPCION SPOTIFY"
+        },
+        {
+          "date_transacted": "2025-04-10",
+          "date_posted": "2025-04-10",
+          "currency": "EUR",
+          "amount": 65.00,
+          "description": "COMBUSTIBLE"
+        },
+        {
+          "date_transacted": "2025-04-15",
+          "date_posted": "2025-04-15",
+          "currency": "EUR",
+          "amount": 35.00,
+          "description": "COMIDA RAPIDA"
+        },
+        {
+          "date_transacted": "2025-04-20",
+          "date_posted": "2025-04-20",
+          "currency": "EUR",
+          "amount": 95.00,
+          "description": "SUPERMERCADO"
+        },
+        {
+          "date_transacted": "2025-04-15",
+          "date_posted": "2025-04-15",
+          "currency": "EUR",
+          "amount": -2500.00,
+          "description": "SALARIO EMPRESA"
+        },
+        {
+          "date_transacted": "2025-04-30",
+          "date_posted": "2025-04-30",
+          "currency": "EUR",
+          "amount": -1200.00,
+          "description": "INGRESO FREELANCE"
+        },
+        {
+          "date_transacted": "2025-04-01",
+          "date_posted": "2025-04-01",
+          "currency": "EUR",
+          "amount": 150.00,
+          "description": "PAGO TARJETA CREDITO"
+        },
+        {
+          "date_transacted": "2025-04-05",
+          "date_posted": "2025-04-05",
+          "currency": "EUR",
+          "amount": 80.00,
+          "description": "SEGURO AUTO"
+        },
+        {
+          "date_transacted": "2025-04-10",
+          "date_posted": "2025-04-10",
+          "currency": "EUR",
+          "amount": 45.00,
+          "description": "SEGURO VIDA"
+        },
+        {
+          "date_transacted": "2025-04-15",
+          "date_posted": "2025-04-15",
+          "currency": "EUR",
+          "amount": 120.00,
+          "description": "CUOTA HIPOTECA"
+        },
+        {
+          "date_transacted": "2025-04-20",
+          "date_posted": "2025-04-20",
+          "currency": "EUR",
+          "amount": 50.00,
+          "description": "CUOTA PRESTAMO PERSONAL"
+        }
+      ]
+    },
+    {
+      "type": "depository",
+      "subtype": "savings",
+      "starting_balance": 275649.12,
+      "meta": {
+        "name": "Cuenta Ahorros Fundeca",
+        "official_name": "Cuenta Ahorros Fundeca"
+      },
+      "numbers": {
+        "account": "0200051333",
+        "international_bic": "BSCHESMMXXX",
+        "international_iban": "ES9121000418450200051333"
+      },
+      "identity": {
+        "names": [
+          "Juan García López"
+        ],
+        "phone_numbers": [
+          {
+            "data": "+34654321098",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "emails": [
+          {
+            "data": "juan.garcia@example.com",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "addresses": [
+          {
+            "data": {
+              "city": "Madrid",
+              "country": "ES",
+              "postal_code": "28001",
+              "region": "Madrid",
+              "street": "Calle Mayor, 123"
+            },
+            "primary": true
+          }
+        ]
+      }
+    },
+    {
+      "type": "depository",
+      "subtype": "checking",
+      "starting_balance": 0,
+      "meta": {
+        "name": "Cuenta Corriente 2",
+        "official_name": "Cuenta Corriente 2"
+      },
+      "numbers": {
+        "account": "0200051334",
+        "international_bic": "BSCHESMMXXX",
+        "international_iban": "ES9121000418450200051334"
+      },
+      "identity": {
+        "names": [
+          "Juan García López"
+        ],
+        "phone_numbers": [
+          {
+            "data": "+34654321098",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "emails": [
+          {
+            "data": "juan.garcia@example.com",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "addresses": [
+          {
+            "data": {
+              "city": "Madrid",
+              "country": "ES",
+              "postal_code": "28001",
+              "region": "Madrid",
+              "street": "Calle Mayor, 123"
+            },
+            "primary": true
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2025-02-01",
+          "date_posted": "2025-02-01",
+          "currency": "EUR",
+          "amount": 500.00,
+          "description": "ALQUILER VIVIENDA"
+        },
+        {
+          "date_transacted": "2025-02-05",
+          "date_posted": "2025-02-05",
+          "currency": "EUR",
+          "amount": -500.00,
+          "description": "NÓMINA MENSUAL"
+        }
+      ]
+    },
+    {
+      "type": "depository",
+      "subtype": "checking",
+      "starting_balance": 0,
+      "meta": {
+        "name": "Cuenta Corriente 3",
+        "official_name": "Cuenta Corriente 3"
+      },
+      "numbers": {
+        "account": "0200051335",
+        "international_bic": "BSCHESMMXXX",
+        "international_iban": "ES9121000418450200051335"
+      },
+      "identity": {
+        "names": [
+          "Juan García López"
+        ],
+        "phone_numbers": [
+          {
+            "data": "+34654321098",
+            "primary": true,
+            "type": "mobile"
+          }
+        ],
+        "emails": [
+          {
+            "data": "juan.garcia@example.com",
+            "primary": true,
+            "type": "primary"
+          }
+        ],
+        "addresses": [
+          {
+            "data": {
+              "city": "Madrid",
+              "country": "ES",
+              "postal_code": "28001",
+              "region": "Madrid",
+              "street": "Calle Mayor, 123"
+            },
+            "primary": true
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2025-02-01",
+          "date_posted": "2025-02-01",
+          "currency": "EUR",
+          "amount": 300.00,
+          "description": "ALQUILER VIVIENDA"
+        },
+        {
+          "date_transacted": "2025-02-05",
+          "date_posted": "2025-02-05",
+          "currency": "EUR",
+          "amount": -1500.00,
+          "description": "NÓMINA MENSUAL"
+        }
+      ]
+    }
+  ]
+}

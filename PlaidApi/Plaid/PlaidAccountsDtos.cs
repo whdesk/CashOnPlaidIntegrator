@@ -38,6 +38,7 @@ namespace PlaidApi.Plaid
         public string access_token { get; set; }
         public string start_date { get; set; } // YYYY-MM-DD
         public string end_date { get; set; }   // YYYY-MM-DD
+
         public Options options { get; set; }
     }
 
@@ -62,16 +63,19 @@ namespace PlaidApi.Plaid
         public string account_id { get; set; }
         public string name { get; set; }
         public decimal amount { get; set; }
-        public string date { get; set; }
-        public string[] category { get; set; } // Corregido: array de strings
-        public string category_id { get; set; }
+        public DateTime date { get; set; }
         public string merchant_name { get; set; }
         public bool pending { get; set; }
         public string iso_currency_code { get; set; }
-        public string unofficial_currency_code { get; set; }
         public string payment_channel { get; set; }
-        public string transaction_type { get; set; }
-        // Puedes agregar más campos según la doc oficial de Plaid
+        public PersonalFinanceCategory personal_finance_category { get; set; }
+    }
+
+    public class PersonalFinanceCategory
+    {
+        public string primary { get; set; }
+        public string detailed { get; set; }
+        public string confidence_level { get; set; }
     }
 
     public class Account

@@ -1,0 +1,516 @@
+{
+  "seed": "dev-team-seed",
+  "override_accounts": [
+    {
+      "type": "depository",
+      "subtype": "checking",
+      "starting_balance": 1000,
+      "meta": {
+        "name": "Cuenta Corriente 1",
+        "official_name": "Cuenta Corriente 1"
+      },
+      "numbers": {
+        "account": "0200051337",
+        "international_bic": "BSCHESMMXXX",
+        "international_iban": "ES9121000418450200051337"
+      },
+      "identity": {
+        "names": [
+          "Elvis Marques",
+          "Juan Molina",
+          "Aixel Amaya",
+          "Hector Trujillo",
+          "Jean Nieves",
+          "Pablo Cornejo",
+          "Admin",
+          "Santiago Vizcaino",
+          "Yaily Briceño",
+          "Adan Guerrero",
+          "Alexander Muñoz",
+          "Yexy Benavides"
+        ],
+        "phone_numbers": [
+          {
+            "data": "+34654321100",
+            "primary": true,
+            "type": "mobile"
+          },
+          {
+            "data": "+34654321101",
+            "primary": false,
+            "type": "home"
+          },
+          {
+            "data": "+34654321102",
+            "primary": false,
+            "type": "work"
+          }
+        ],
+        "emails": [
+          {
+            "data": "emarques@initiumsoft.com",
+            "primary": true,
+            "type": "primary"
+          },
+          {
+            "data": "jmolina@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "aamaya@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "htrujillo@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "jnieves@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "pcornejo@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "admin@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "svizcaino@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "ybriceno@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "aguerrero@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "amunoz@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "ybenavides@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "jnieves@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "pcornejo@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "admin@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "svizcaino@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "ybriceno@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "aguerrero@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "amunoz@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "ybenavides@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          }
+        ],
+        "addresses": [
+          {
+            "data": {
+              "city": "Valencia",
+              "country": "ES",
+              "postal_code": "46001",
+              "region": "Valencia",
+              "street": "Calle de la Paz, 10"
+            },
+            "primary": true
+          },
+          {
+            "data": {
+              "city": "Barcelona",
+              "country": "ES",
+              "postal_code": "08001",
+              "region": "Cataluña",
+              "street": "Carrer de la Pau, 45"
+            },
+            "primary": false
+          },
+          {
+            "data": {
+              "city": "Madrid",
+              "country": "ES",
+              "postal_code": "28001",
+              "region": "Madrid",
+              "street": "Calle Mayor, 123"
+            },
+            "primary": false
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2025-02-01",
+          "date_posted": "2025-02-01",
+          "currency": "EUR",
+          "amount": 1000.00,
+          "description": "ALQUILER VIVIENDA"
+        },
+        {
+          "date_transacted": "2025-02-05",
+          "date_posted": "2025-02-05",
+          "currency": "EUR",
+          "amount": -1500.00,
+          "description": "NÓMINA MENSUAL"
+        }
+      ]
+    },
+    {
+      "type": "depository",
+      "subtype": "savings",
+      "starting_balance": 5000,
+      "meta": {
+        "name": "Cuenta Ahorros",
+        "official_name": "Cuenta Ahorros"
+      },
+      "numbers": {
+        "account": "0200051338",
+        "international_bic": "BSCHESMMXXX",
+        "international_iban": "ES9121000418450200051338"
+      },
+      "identity": {
+        "names": [
+          "Elvis Marques",
+          "Juan Molina",
+          "Aixel Amaya",
+          "Hector Trujillo",
+          "Jean Nieves",
+          "Pablo Cornejo",
+          "Admin",
+          "Santiago Vizcaino",
+          "Yaily Briceño",
+          "Adan Guerrero",
+          "Alexander Muñoz",
+          "Yexy Benavides"
+        ],
+        "phone_numbers": [
+          {
+            "data": "+34654321100",
+            "primary": true,
+            "type": "mobile"
+          },
+          {
+            "data": "+34654321101",
+            "primary": false,
+            "type": "home"
+          },
+          {
+            "data": "+34654321102",
+            "primary": false,
+            "type": "work"
+          }
+        ],
+        "emails": [
+          {
+            "data": "emarques@initiumsoft.com",
+            "primary": true,
+            "type": "primary"
+          },
+          {
+            "data": "jmolina@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "aamaya@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "htrujillo@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "jnieves@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "pcornejo@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "admin@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "svizcaino@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "ybriceno@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "aguerrero@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "amunoz@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "ybenavides@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          }
+        ],
+        "addresses": [
+          {
+            "data": {
+              "city": "Valencia",
+              "country": "ES",
+              "postal_code": "46001",
+              "region": "Valencia",
+              "street": "Calle de la Paz, 10"
+            },
+            "primary": true
+          },
+          {
+            "data": {
+              "city": "Barcelona",
+              "country": "ES",
+              "postal_code": "08001",
+              "region": "Cataluña",
+              "street": "Carrer de la Pau, 45"
+            },
+            "primary": false
+          },
+          {
+            "data": {
+              "city": "Madrid",
+              "country": "ES",
+              "postal_code": "28001",
+              "region": "Madrid",
+              "street": "Calle Mayor, 123"
+            },
+            "primary": false
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2025-02-01",
+          "date_posted": "2025-02-01",
+          "currency": "EUR",
+          "amount": 200.00,
+          "description": "COMPRA ONLINE"
+        },
+        {
+          "date_transacted": "2025-02-10",
+          "date_posted": "2025-02-10",
+          "currency": "EUR",
+          "amount": -100.00,
+          "description": "INTERÉS CUENTA"
+        }
+      ]
+    },
+    {
+      "type": "credit",
+      "subtype": "credit card",
+      "starting_balance": 200,
+      "meta": {
+        "name": "Tarjeta de Crédito",
+        "official_name": "Tarjeta de Crédito"
+      },
+      "numbers": {
+        "account": "0200051339",
+        "international_bic": "BSCHESMMXXX",
+        "international_iban": "ES9121000418450200051339"
+      },
+      "identity": {
+        "names": [
+          "Elvis Marques",
+          "Juan Molina",
+          "Aixel Amaya",
+          "Hector Trujillo",
+          "Jean Nieves",
+          "Pablo Cornejo",
+          "Admin",
+          "Santiago Vizcaino",
+          "Yaily Briceño",
+          "Adan Guerrero",
+          "Alexander Muñoz",
+          "Yexy Benavides"
+        ],
+        "phone_numbers": [
+          {
+            "data": "+34654321100",
+            "primary": true,
+            "type": "mobile"
+          },
+          {
+            "data": "+34654321101",
+            "primary": false,
+            "type": "home"
+          },
+          {
+            "data": "+34654321102",
+            "primary": false,
+            "type": "work"
+          }
+        ],
+        "emails": [
+          {
+            "data": "emarques@initiumsoft.com",
+            "primary": true,
+            "type": "primary"
+          },
+          {
+            "data": "jmolina@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "aamaya@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "htrujillo@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "jnieves@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "pcornejo@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "admin@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "svizcaino@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "ybriceno@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "aguerrero@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "amunoz@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          },
+          {
+            "data": "ybenavides@initiumsoft.com",
+            "primary": false,
+            "type": "secondary"
+          }
+        ],
+        "addresses": [
+          {
+            "data": {
+              "city": "Valencia",
+              "country": "ES",
+              "postal_code": "46001",
+              "region": "Valencia",
+              "street": "Calle de la Paz, 10"
+            },
+            "primary": true
+          },
+          {
+            "data": {
+              "city": "Barcelona",
+              "country": "ES",
+              "postal_code": "08001",
+              "region": "Cataluña",
+              "street": "Carrer de la Pau, 45"
+            },
+            "primary": false
+          },
+          {
+            "data": {
+              "city": "Madrid",
+              "country": "ES",
+              "postal_code": "28001",
+              "region": "Madrid",
+              "street": "Calle Mayor, 123"
+            },
+            "primary": false
+          }
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2025-02-01",
+          "date_posted": "2025-02-01",
+          "currency": "EUR",
+          "amount": 50.00,
+          "description": "PAGO TARJETA"
+        },
+        {
+          "date_transacted": "2025-02-15",
+          "date_posted": "2025-02-15",
+          "currency": "EUR",
+          "amount": -200.00,
+          "description": "DEVOLUCIÓN TARJETA"
+        }
+      ]
+    }
+  ]
+}

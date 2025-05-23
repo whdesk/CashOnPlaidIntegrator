@@ -61,6 +61,78 @@ namespace PlaidApi.Pibisi
         public object meta { get; set; }
     }
 
+    public class PibisiSubjectFindMatch
+    {
+        public string Uuid { get; set; }
+        public string FullName { get; set; }
+        public string NationalId { get; set; }
+        public string NationalIdCountry { get; set; }
+        public string BirthDate { get; set; }
+        public double Similarity { get; set; }
+        public string Status { get; set; } // Ej: "blacklist", "match", etc
+    }
+
+    // NUEVO: DTO fiel al JSON real de /subjects/find
+    public class PibisiSubjectFindRootResponse
+    {
+        public PibisiSubjectFindData data { get; set; }
+    }
+
+    public class PibisiSubjectFindData
+    {
+        public PibisiSearchResult search_result { get; set; }
+        public List<PibisiSubjectMatch> matches { get; set; }
+    }
+
+    public class PibisiSearchResult
+    {
+        public string uuid { get; set; }
+        public double threshold { get; set; }
+        public string status { get; set; }
+        public List<PibisiPoi> pois { get; set; }
+        public List<PibisiSearchMatch> matches { get; set; }
+    }
+
+    public class PibisiPoi
+    {
+        public string type { get; set; }
+        public object content { get; set; }
+    }
+
+    public class PibisiSearchMatch
+    {
+        public string subject { get; set; }
+        public double similarity { get; set; }
+        public double cardinality { get; set; }
+        public object similarity_vector { get; set; }
+    }
+
+    public class PibisiSubjectMatch
+    {
+        public string uuid { get; set; }
+        public List<PibisiSubjectInfo> info { get; set; }
+        public double similarity { get; set; }
+        public double cardinality { get; set; }
+        public object similarity_vector { get; set; }
+        public PibisiScoring scoring { get; set; } // Ahora tipado
+                                                   
+    }
+
+    public class PibisiSubjectInfo
+    {
+        public string group { get; set; }
+        public string uuid { get; set; }
+        public string type { get; set; }
+        public object content { get; set; }
+    }
+
+    // DTO anterior (puede quedar para compatibilidad)
+    public class PibisiSubjectFindResponse
+    {
+        public List<PibisiSubjectFindMatch> Data { get; set; }
+        public object Meta { get; set; }
+    }
+
     public class PibisiCustomerData
     {
         public string uuid { get; set; }
@@ -74,22 +146,22 @@ namespace PlaidApi.Pibisi
     {
         public int value { get; set; }
         public PibisiFlags flags { get; set; }
+        public bool is_pep { get; set; }
+        public bool was_pep { get; set; }
+        public bool is_sanctioned { get; set; }
+        public bool was_sanctioned { get; set; }
+        public bool is_terrorist { get; set; }
+        public bool is_high_risk { get; set; }
     }
 
     public class PibisiFlags
     {
-        public bool has_adverse_info { get; set; }
-        public bool has_matches { get; set; }
-        public bool has_media { get; set; }
-        public string has_media_date { get; set; }
-        public bool is_high_risk { get; set; }
         public bool is_pep { get; set; }
         public bool was_pep { get; set; }
-        public string was_pep_date { get; set; }
         public bool is_sanctioned { get; set; }
         public bool was_sanctioned { get; set; }
-        public string was_sanctioned_date { get; set; }
         public bool is_terrorist { get; set; }
+        public bool is_high_risk { get; set; }
     }
 
     public class PibisiPoiInfo

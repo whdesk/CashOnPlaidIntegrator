@@ -52,11 +52,11 @@ namespace PlaidApi.Controllers
 
             try
             {
-                // Usar HttpClient inyectado por DI para enviar form-urlencoded
                 var accountId = _config["PIBISI_ACCOUNT_ID"];
                 if (string.IsNullOrEmpty(accountId))
                     return BadRequest(new { registrado = false, error = "No se configuró el ACCOUNT_ID de PIBISI." });
 
+                // --- Paso 2: Proceder con el registro normal si no hay coincidencias peligrosas ---
                 // Construir el arreglo de POIs a partir del request
                 // Validar campos obligatorios
                 if (string.IsNullOrWhiteSpace(req.PersonType) ||
@@ -87,16 +87,68 @@ namespace PlaidApi.Controllers
                     pois.AddRange(idPois);
 
                 var poisJson = System.Text.Json.JsonSerializer.Serialize(pois);
-
                 var formData = new PibisiCustomerFormData { Pois = poisJson };
+
+                var findResponse = await _pibisiApi.FindSubjectAsync(accountId, formData, authToken);
+
+                // Analizar matches muy cercanos y presencia en listas negras
+                var dangerousMatches = new List<object>();
+                bool matchCercano = false;
+                bool enListaNegra = false;
+                bool riesgoPorFlags = false;
+                if (findResponse?.data?.matches != null && findResponse.data.matches.Count != 0)
+                {
+                    foreach (var match in findResponse.data.matches)
+                    {
+                        // Similaridad muy cercana
+                        if (match.similarity >= 0.9)
+                            matchCercano = true;
+
+                        // Buscar en info si hay tipo de riesgo oficial
+                        bool matchEnListaNegra = false;
+
+                        // Evaluar flags de riesgo de forma tipada
+                        var flagsObj = match.scoring;
+                        bool isHighRisk = flagsObj?.is_high_risk ?? false;
+                        bool isPep = flagsObj?.is_pep ?? false;
+                        bool isSanctioned = flagsObj?.is_sanctioned ?? false;
+                        bool isTerrorist = flagsObj?.is_terrorist ?? false;
+
+                        if (isHighRisk || isPep || isSanctioned || isTerrorist)
+                        {
+                            riesgoPorFlags = true;
+                        }
+
+                        if (matchEnListaNegra || isHighRisk || isPep || isSanctioned || isTerrorist)
+                        {
+                            dangerousMatches.Add(new {
+                                uuid = match.uuid,
+                                similarity = match.similarity,
+                                info = match.info?.Select(i => new { i.type, i.content }),
+                                flags = flagsObj
+                            });
+                        }
+                    }
+                }
+
+                if (matchCercano || enListaNegra || riesgoPorFlags)
+                {
+                    return Ok(new {
+                        registrado = false,
+                        coincidencias = dangerousMatches,
+                        matchCercano,
+                        enListaNegra,
+                        riesgoPorFlags,
+                        mensaje = "El cliente tiene coincidencias muy cercanas, en listas negras o presenta riesgo por flags. No se procederá con el registro."
+                    });
+                }
+
+                // --- Paso 2: Proceder con el registro normal si no hay coincidencias peligrosas ---
+
                 var response = await _pibisiApi.RegisterCustomer(accountId, formData);
 
-                // Validar si está en listas negras (simulación: buscar campo "blacklist" en data/meta)
-                bool enListaNegra = false;
-                if (response.data != null && response.data.ToString().ToLower().Contains("blacklist"))
-                    enListaNegra = true;
-                if (response.meta != null && response.meta.ToString().ToLower().Contains("blacklist"))
-                    enListaNegra = true;
+                if (response?.data == null)
+                    return BadRequest(new { registrado = false, error = "No se pudo registrar el cliente." });
 
                 // Armar respuesta simplificada y útil para frontend
                 var flags = response.data?.scoring?.flags;

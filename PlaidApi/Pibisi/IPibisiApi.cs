@@ -23,5 +23,13 @@ namespace PlaidApi.Pibisi
             [AliasAs("account")] string accountId,
             [AliasAs("customer")] string customer
         );
+
+        [Headers("Content-Type: application/x-www-form-urlencoded")]
+        [Post("/accounts/{account}/subjects/find")]
+        Task<PibisiSubjectFindRootResponse> FindSubjectAsync(
+            [AliasAs("account")] string accountId,
+            [Body(BodySerializationMethod.UrlEncoded)] PibisiCustomerFormData formData,
+            [Header("X-AUTH-TOKEN")] string authToken
+        );
     }
 }

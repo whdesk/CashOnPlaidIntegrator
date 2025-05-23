@@ -25,15 +25,15 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Configura un HttpClient específico para Pibisi
-builder.Services.AddHttpClient("Pibisi", (serviceProvider, client) =>
-{
-    var config = serviceProvider.GetRequiredService<IConfiguration>();
-    client.BaseAddress = new Uri(config["PIBISI_API_BASE"] ?? "https://int.api.pibisi.com/");
-    var token = config["PIBISI_AUTH_TOKEN"];
-    if (!string.IsNullOrWhiteSpace(token))
-        client.DefaultRequestHeaders.Add("X-AUTH-TOKEN", token);
-});
+//// Configura un HttpClient específico para Pibisi
+//builder.Services.AddHttpClient("Pibisi", (serviceProvider, client) =>
+//{
+//    var config = serviceProvider.GetRequiredService<IConfiguration>();
+//    client.BaseAddress = new Uri(config["PIBISI_API_BASE"] ?? "https://int.api.pibisi.com/");
+//    var token = config["PIBISI_AUTH_TOKEN"];
+//    if (!string.IsNullOrWhiteSpace(token))
+//        client.DefaultRequestHeaders.Add("X-AUTH-TOKEN", token);
+//});
 
 builder.Services.AddControllers();
 

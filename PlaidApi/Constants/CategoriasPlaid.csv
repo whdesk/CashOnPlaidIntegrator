@@ -1,0 +1,70 @@
+CategoriaGeneral;Key;Descripcion
+Ingresos Recurrentes;INCOME_WAGES;Ingresos de salarios, trabajos de economía colaborativa y propinas ganadas
+Ingresos Recurrentes;INCOME_RETIREMENT_PENSION;Ingresos de pagos de pensiones
+Ingresos Recurrentes;INCOME_UNEMPLOYMENT;Ingresos de beneficios por desempleo, incluyendo seguro de desempleo y atención médica
+Ingresos Recurrentes;RENT_AND_UTILITIES_RENT;Pago de alquiler recibido
+Ingresos Recurrentes;INCOME_OTHER_INCOME;Otros ingresos diversos, incluyendo alimentos, seguridad social, manutención y alquiler
+Ingresos Puntuales a Excluir;INCOME_TAX_REFUND;Ingresos de reembolsos de impuestos
+Ingresos Puntuales a Excluir;INCOME_DIVIDENDS;Dividendos de cuentas de inversión
+Ingresos Puntuales a Excluir;INCOME_INTEREST_EARNED;Ingresos de intereses en cuentas de ahorros
+Transferencias a Excluir;TRANSFER_IN_ACCOUNT_TRANSFER;Transferencias generales desde otra cuenta
+Transferencias a Excluir;TRANSFER_IN_CASH_ADVANCES_AND_LOANS;Préstamos y avances en efectivo depositados en una cuenta bancaria
+Transferencias a Excluir;TRANSFER_IN_INVESTMENT_AND_RETIREMENT_FUNDS;Transferencias entrantes a una cuenta de inversión o retiro
+Transferencias a Excluir;TRANSFER_IN_SAVINGS;Transferencias entrantes a una cuenta de ahorros
+Transferencias a Excluir;TRANSFER_IN_OTHER_TRANSFER_IN;Otras transacciones entrantes diversas
+Transferencias a Excluir;TRANSFER_IN_DEPOSIT;Depósitos de efectivo, cheques y cajeros automáticos en una cuenta bancaria
+Egresos Recurrentes;RENT_AND_UTILITIES_RENT;Pago de alquiler
+Egresos Recurrentes;RENT_AND_UTILITIES_GAS_AND_ELECTRICITY;Servicios de gas y electricidad
+Egresos Recurrentes;RENT_AND_UTILITIES_INTERNET_AND_CABLE;Servicios de internet y cable
+Egresos Recurrentes;RENT_AND_UTILITIES_TELEPHONE;Servicio telefónico
+Egresos Recurrentes;RENT_AND_UTILITIES_WATER;Servicio de agua
+Egresos Recurrentes;RENT_AND_UTILITIES_OTHER_UTILITIES;Otros servicios públicos
+Egresos Recurrentes;RENT_AND_UTILITIES_SEWAGE_AND_WASTE_MANAGEMENT;Gestión de aguas residuales y basura
+Egresos Recurrentes;LOAN_PAYMENTS_CAR_PAYMENT;Pago de préstamo de auto
+Egresos Recurrentes;LOAN_PAYMENTS_CREDIT_CARD_PAYMENT;Pago de tarjeta de crédito
+Egresos Recurrentes;LOAN_PAYMENTS_MORTGAGE_PAYMENT;Pago de hipoteca
+Egresos Recurrentes;LOAN_PAYMENTS_PERSONAL_LOAN_PAYMENT;Pago de préstamo personal
+Egresos Recurrentes;LOAN_PAYMENTS_STUDENT_LOAN_PAYMENT;Pago de préstamo estudiantil
+Egresos Recurrentes;LOAN_PAYMENTS_OTHER_PAYMENT;Otros pagos de préstamos
+Egresos Recurrentes;GENERAL_SERVICES_EDUCATION;Gastos educativos
+Egresos Recurrentes;GENERAL_SERVICES_INSURANCE;Seguros
+Egresos Variables a Excluir;FOOD_AND_DRINK_RESTAURANT;Restaurantes
+Egresos Variables a Excluir;FOOD_AND_DRINK_BEER_WINE_AND_LIQUOR;Tiendas de cerveza, vino y licores
+Egresos Variables a Excluir;FOOD_AND_DRINK_COFFEE;Cafeterías
+Egresos Variables a Excluir;FOOD_AND_DRINK_FAST_FOOD;Comida rápida
+Egresos Variables a Excluir;FOOD_AND_DRINK_GROCERIES;Supermercados y abarrotes
+Egresos Variables a Excluir;FOOD_AND_DRINK_VENDING_MACHINES;Máquinas expendedoras
+Egresos Variables a Excluir;FOOD_AND_DRINK_OTHER_FOOD_AND_DRINK;Otros gastos de comida y bebida
+Egresos Variables a Excluir;ENTERTAINMENT_CASINOS_AND_GAMBLING;Apuestas, casinos y apuestas deportivas
+Egresos Variables a Excluir;ENTERTAINMENT_MUSIC_AND_AUDIO;Música y servicios de streaming de audio
+Egresos Variables a Excluir;ENTERTAINMENT_SPORTING_EVENTS_AMUSEMENT_PARKS_AND_MUSEUMS;Eventos deportivos, museos, parques de diversiones
+Egresos Variables a Excluir;ENTERTAINMENT_TV_AND_MOVIES;Streaming de películas y cines
+Egresos Variables a Excluir;ENTERTAINMENT_VIDEO_GAMES;Videojuegos
+Egresos Variables a Excluir;ENTERTAINMENT_OTHER_ENTERTAINMENT;Vida nocturna y entretenimiento para adultos
+Egresos Variables a Excluir;PERSONAL_CARE_GYMS_AND_FITNESS_CENTERS;Gimnasios y fitness
+Egresos Variables a Excluir;PERSONAL_CARE_HAIR_AND_BEAUTY;Peluquería y belleza
+Egresos Variables a Excluir;PERSONAL_CARE_LAUNDRY_AND_DRY_CLEANING;Lavandería y tintorería
+Egresos Variables a Excluir;PERSONAL_CARE_OTHER_PERSONAL_CARE;Otros cuidados personales
+Egresos Variables a Excluir;TRANSPORTATION_BIKES_AND_SCOOTERS;Bicicletas y scooters
+Egresos Variables a Excluir;TRANSPORTATION_GAS;Gasolina
+Egresos Variables a Excluir;TRANSPORTATION_PARKING;Estacionamiento
+Egresos Variables a Excluir;TRANSPORTATION_PUBLIC_TRANSIT;Transporte público
+Egresos Variables a Excluir;TRANSPORTATION_TAXIS_AND_RIDE_SHARES;Taxis y apps de transporte
+Egresos Variables a Excluir;TRANSPORTATION_TOLLS;Peajes
+Egresos Variables a Excluir;TRANSPORTATION_OTHER_TRANSPORTATION;Otros gastos de transporte
+Egresos Variables a Excluir;HOME_IMPROVEMENT_FURNITURE;Muebles
+Egresos Variables a Excluir;HOME_IMPROVEMENT_HARDWARE;Ferretería
+Egresos Variables a Excluir;HOME_IMPROVEMENT_REPAIR_AND_MAINTENANCE;Reparaciones y mantenimiento
+Egresos Variables a Excluir;HOME_IMPROVEMENT_SECURITY;Seguridad del hogar
+Egresos Variables a Excluir;HOME_IMPROVEMENT_OTHER_HOME_IMPROVEMENT;Otras mejoras del hogar
+Egresos Variables a Excluir;MEDICAL_DENTAL_CARE;Cuidado dental
+Egresos Variables a Excluir;MEDICAL_EYE_CARE;Cuidado de la vista
+Egresos Variables a Excluir;MEDICAL_NURSING_CARE;Enfermería
+Egresos Variables a Excluir;MEDICAL_PHARMACIES_AND_SUPPLEMENTS;Farmacias y suplementos
+Egresos Variables a Excluir;MEDICAL_PRIMARY_CARE;Atención primaria
+Egresos Variables a Excluir;MEDICAL_VETERINARY_SERVICES;Servicios veterinarios
+Egresos Variables a Excluir;MEDICAL_OTHER_MEDICAL;Otros gastos médicos
+Egresos Variables a Excluir;GOVERNMENT_AND_NON_PROFIT_DONATIONS;Donaciones
+Egresos Variables a Excluir;GOVERNMENT_AND_NON_PROFIT_GOVERNMENT_DEPARTMENTS_AND_AGENCIES;Pagos a entidades gubernamentales
+Egresos Variables a Excluir;GOVERNMENT_AND_NON_PROFIT_TAX_PAYMENT;Pago de impuestos
+Egresos Variables a Excluir;GOVERNMENT_AND_NON_PROFIT_OTHER_GOVERNMENT_AND_NON_PROFIT;Otros pagos a gobierno y ONGs

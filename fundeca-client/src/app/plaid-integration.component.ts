@@ -110,9 +110,9 @@ export class PlaidIntegrationComponent implements OnInit {
     // Ejemplo de datos básicos para el registro y validación (nuevo formato)
     const payload = {
       Country: 'ESP', // País del documento
-      NationalId: '00000000T', // NIF válido para pruebas
-      FullName: 'Juan Perez',
-      BirthDate: '1980-01-01',
+      NationalId: '17804474J', // NIF válido para pruebas
+      FullName: 'José Ignacio Echeverría Echániz',
+      BirthDate: '1999-01-01',
       City: 'Madrid',
       ZipCode: '28013'
     };

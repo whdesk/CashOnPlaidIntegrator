@@ -1,0 +1,250 @@
+{
+    "seed": "caso_aprobado_AnaP",
+    "override_accounts": [
+    {
+      "type": "checking",
+      "starting_balance": 5000,
+      "currency": "EUR",
+      "meta":{
+        "name": "Cuenta Corriente Principal",
+        "official_name": "Cuenta Corriente Principal"
+      },
+      "numbers": {
+        "account": "0200051332",
+        "international_bic": "BSCHESMMXXX",
+        "international_iban": "ES9121000418450200051332"
+      },
+      "identity": {
+        "names": [
+          "Ana Pérez Sánchez"
+        ]
+      },
+      "transactions": [
+        {
+          "date_transacted": "2025-06-01",
+          "date_posted": "2025-06-01",
+          "amount": -2800,
+          "description": "NOMINA JUNIO",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-06-02",
+          "date_posted": "2025-06-02",
+          "amount": -200,
+          "description": "FREELANCE",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-06-05",
+          "date_posted": "2025-06-05",
+          "amount": 900,
+          "description": "ALQUILER JUNIO",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-06-07",
+          "date_posted": "2025-06-07",
+          "amount": 400,
+          "description": "HIPOTECA",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-06-10",
+          "date_posted": "2025-06-10",
+          "amount": 50,
+          "description": "TARJETA CREDITO",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-06-12",
+          "date_posted": "2025-06-12",
+          "amount": 100,
+          "description": "CURSO ONLINE",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-06-15",
+          "date_posted": "2025-06-15",
+          "amount": 350,
+          "description": "SUPERMERCADO",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-06-17",
+          "date_posted": "2025-06-17",
+          "amount": 120,
+          "description": "STREAMING",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-06-19",
+          "date_posted": "2025-06-19",
+          "amount": 150,
+          "description": "CONSULTA OFTALMOLOGICA",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-06-21",
+          "date_posted": "2025-06-21",
+          "amount": 300,
+          "description": "GASOLINA",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-05-01",
+          "date_posted": "2025-05-01",
+          "amount": -2800,
+          "description": "NOMINA MAYO",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-05-02",
+          "date_posted": "2025-05-02",
+          "amount": -200,
+          "description": "FREELANCE",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-05-05",
+          "date_posted": "2025-05-05",
+          "amount": 900,
+          "description": "ALQUILER MAYO",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-05-07",
+          "date_posted": "2025-05-07",
+          "amount": 400,
+          "description": "HIPOTECA",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-05-10",
+          "date_posted": "2025-05-10",
+          "amount": 50,
+          "description": "TARJETA CREDITO",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-05-12",
+          "date_posted": "2025-05-12",
+          "amount": 100,
+          "description": "CURSO ONLINE",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-05-15",
+          "date_posted": "2025-05-15",
+          "amount": 350,
+          "description": "SUPERMERCADO",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-05-17",
+          "date_posted": "2025-05-17",
+          "amount": 120,
+          "description": "STREAMING",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-05-19",
+          "date_posted": "2025-05-19",
+          "amount": 150,
+          "description": "CONSULTA OFTALMOLOGICA",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-05-21",
+          "date_posted": "2025-05-21",
+          "amount": 300,
+          "description": "GASOLINA",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-04-01",
+          "date_posted": "2025-04-01",
+          "amount": -2800,
+          "description": "NOMINA ABRIL",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-04-02",
+          "date_posted": "2025-04-02",
+          "amount": -200,
+          "description": "FREELANCE",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-04-05",
+          "date_posted": "2025-04-05",
+          "amount": 900,
+          "description": "ALQUILER ABRIL",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-04-07",
+          "date_posted": "2025-04-07",
+          "amount": 400,
+          "description": "HIPOTECA",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-04-10",
+          "date_posted": "2025-04-10",
+          "amount": 50,
+          "description": "TARJETA CREDITO",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-04-12",
+          "date_posted": "2025-04-12",
+          "amount": 100,
+          "description": "CURSO ONLINE",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-04-15",
+          "date_posted": "2025-04-15",
+          "amount": 350,
+          "description": "SUPERMERCADO",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-04-17",
+          "date_posted": "2025-04-17",
+          "amount": 120,
+          "description": "STREAMING",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-04-19",
+          "date_posted": "2025-04-19",
+          "amount": 150,
+          "description": "CONSULTA OFTALMOLOGICA",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-04-21",
+          "date_posted": "2025-04-21",
+          "amount": 300,
+          "description": "GASOLINA",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-06-25",
+          "date_posted": "2025-06-25",
+          "amount": -860,
+          "description": "EXTRA JUNIO",
+          "currency": "EUR"
+        },
+        {
+          "date_transacted": "2025-06-26",
+          "date_posted": "2025-06-26",
+          "amount": -26,
+          "description": "DIVIDENDOS",
+          "currency": "EUR"
+        }
+      ]
+    }
+  ]
+}

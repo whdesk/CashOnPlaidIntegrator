@@ -1,0 +1,12 @@
+<div class="paylands-tokenization">
+  <h2>Tokenización de Tarjeta (Paylands)</h2>
+  <button *ngIf="!customerToken && !loading" (click)="createCustomer()">Crear cliente y mostrar formulario</button>
+  <div *ngIf="loading">Cargando...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div id="paylands-iframe" *ngIf="customerToken"></div>
+  <button *ngIf="customerToken && !savedCardData && !loading" (click)="onTokenizeCard()">Tokenizar tarjeta</button>
+  <div *ngIf="savedCardData">
+    <h3>Tarjeta Tokenizada</h3>
+    <pre>{{ savedCardData | json }}</pre>
+  </div>
+</div>

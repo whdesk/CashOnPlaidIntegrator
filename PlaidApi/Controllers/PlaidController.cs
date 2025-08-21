@@ -138,7 +138,7 @@ namespace PlaidApi.Controllers
             var promedioIngresos = ingresosRecurrentes.Average();
             var promedioEgresos = egresosRecurrentes.Average();
 
-            decimal ratio = promedioIngresos > 0 ? promedioEgresos / promedioIngresos : 0;
+            decimal ratio = promedioIngresos > 0 ? promedioIngresos / promedioEgresos : 0;
 
             // Determinar nivel de capacidad
             PaymentCapacityRules.PaymentCapacityLevel nivelCapacidad = PaymentCapacityRules.GetPaymentCapacityLevel(ratio);

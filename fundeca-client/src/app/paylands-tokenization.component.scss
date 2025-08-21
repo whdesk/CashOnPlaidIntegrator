@@ -1,0 +1,19 @@
+.paylands-tokenization {
+  max-width: 500px;
+  margin: 2rem auto;
+  background: #fafbfc;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.paylands-tokenization h2 {
+  margin-bottom: 1rem;
+}
+.paylands-tokenization .error {
+  color: #b00020;
+  margin-top: 1rem;
+}
+#paylands-iframe {
+  min-height: 340px;
+  margin-top: 1rem;
+}

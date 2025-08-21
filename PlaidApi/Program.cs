@@ -1,4 +1,6 @@
 using Refit;
+using PlaidApi.Services;
+using PlaidApi.Paylands;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,17 @@ builder.Services.AddRefitClient<PlaidApi.Pibisi.IPibisiApi>()
             c.DefaultRequestHeaders.Add("X-AUTH-TOKEN", token);
     });
 
+// Registrar el cliente Refit para Paylands
+builder.Services.AddRefitClient<IPaylandsApi>()
+    .ConfigureHttpClient((sp, c) =>
+    {
+        c.BaseAddress = new Uri("https://api.paylands.com/v1/sandbox");
+        var config = sp.GetRequiredService<IConfiguration>();
+        var apiKey = config["PAYLANDS_API_KEY"] ?? "cd826d49c11245c5b28dcd98d6c76f0a";
+        var byteArray = System.Text.Encoding.ASCII.GetBytes($"{apiKey}:");
+        c.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiKey);
+    });
+
 // Permite CORS para el frontend Angular
 builder.Services.AddCors(options =>
 {
@@ -25,15 +38,8 @@ builder.Services.AddCors(options =>
     });
 });
 
-//// Configura un HttpClient específico para Pibisi
-//builder.Services.AddHttpClient("Pibisi", (serviceProvider, client) =>
-//{
-//    var config = serviceProvider.GetRequiredService<IConfiguration>();
-//    client.BaseAddress = new Uri(config["PIBISI_API_BASE"] ?? "https://int.api.pibisi.com/");
-//    var token = config["PIBISI_AUTH_TOKEN"];
-//    if (!string.IsNullOrWhiteSpace(token))
-//        client.DefaultRequestHeaders.Add("X-AUTH-TOKEN", token);
-//});
+// Registrar PaylandsApiService con interfaz
+builder.Services.AddScoped<IPaylandsApiService, PaylandsApiService>();
 
 builder.Services.AddControllers();
 

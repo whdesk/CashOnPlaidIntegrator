@@ -19,4 +19,8 @@ export class AppComponent {
   goToStripe() {
     this.router.navigate(['/stripe']);
   }
+
+  goToPaylandsTokenization() {
+    this.router.navigate(['/paylands-tokenizacion']);
+  }
 }

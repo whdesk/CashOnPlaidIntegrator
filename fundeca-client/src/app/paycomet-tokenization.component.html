@@ -1,0 +1,59 @@
+<div class="paycomet-wrap">
+  <h2>PayCOMET Tokenización (Demo)</h2>
+
+  <div class="result" *ngIf="!jetReady">
+    <p>SDK JET: {{ jetPublicKey ? 'clave encontrada' : 'clave no configurada' }}</p>
+    <p *ngIf="error"><strong>Error:</strong> {{ error }}</p>
+  </div>
+
+  <!-- Formulario según documentación JET/iFrame -->
+  <form id="paycometPaymentForm" [formGroup]="cardForm" method="POST" novalidate (ngSubmit)="onSubmit($event)">
+    <!-- Contenedor de errores requerido por el SDK -->
+    <div id="paymentErrorMsg"></div>
+    <!-- Campos requeridos por JET: holder, mes, año -->
+    <label for="holderName">Titular</label>
+    <input id="holderName" type="text" data-paycomet="cardHolderName" formControlName="holder" />
+    <label for="month">Mes (MM)</label>
+    <input id="month" type="text" data-paycomet="dateMonth" formControlName="month" />
+    <label for="year">Año (YY)</label>
+    <input id="year" type="text" data-paycomet="dateYear" formControlName="year" />
+
+    <!-- Divs obligatorios: PAN y CVC2 con ids exactos -->
+    <label for="paycomet-pan">Número de tarjeta</label>
+    <!-- Input marcador requerido por el SDK: será eliminado tras inyectar el iframe -->
+    <input type="text" id="old-pan-input" paycomet-name="pan" paycomet-style="" paycomet-placeholder="" />
+    <div id="paycomet-pan" data-paycomet="paNumber" style="border:1px solid #cbd5e1; padding:.5rem; border-radius:6px; margin:.25rem 0 .5rem; min-height:40px;"></div>
+    <label for="paycomet-cvc2">CVC</label>
+    <!-- Input marcador requerido por el SDK: será eliminado tras inyectar el iframe -->
+    <input type="text" id="old-CVC2-input" paycomet-name="cvc2" paycomet-style="" paycomet-placeholder="" />
+    <div id="paycomet-cvc2" data-paycomet="cvc2" style="border:1px solid #cbd5e1; padding:.5rem; border-radius:6px; margin:.25rem 0 .5rem; min-height:40px;"></div>
+
+    <!-- jetID oculto: public key -->
+    <input type="hidden" data-paycomet="jetID" [value]="jetPublicKey || ''" />
+    <!-- Callback para capturar el token generado por JET -->
+    <input type="hidden" data-paycomet="callback" value="paycometHandler" />
+
+    <div class="actions">
+      <button type="submit" [attr.disabled]="loading ? '' : null">{{ loading ? 'Guardando tarjeta...' : 'Guardar tarjeta' }}</button>
+    </div>
+  </form>
+  <div class="result">
+    <p><strong>Debug form:</strong> {{ cardForm.value | json }}</p>
+    <p><strong>PAN iframe cargado:</strong> {{ panIframeReady }}</p>
+    <p><strong>CVC iframe cargado:</strong> {{ cvcIframeReady }}</p>
+    <p><strong>jetID:</strong> {{ jetIdInDom || '(vacío)' }}</p>
+    <p><strong>jetToken:</strong> {{ jetTokenDebug || '(aún no generado)' }}</p>
+  </div>
+  <div class="actions">
+    <button (click)="chargeToken()" [attr.disabled]="(loading || !idUser || !tokenUser) ? '' : null">{{ loading ? 'Cobrando...' : 'Cobrar con token (MIT)' }}</button>
+  </div>
+
+  <div class="result" *ngIf="idUser && tokenUser">
+    <p><strong>idUser:</strong> {{ idUser }}</p>
+    <p><strong>tokenUser:</strong> {{ tokenUser }}</p>
+  </div>
+
+  <div class="result" *ngIf="error">
+    <strong>Error:</strong> {{ error }}
+  </div>
+</div>

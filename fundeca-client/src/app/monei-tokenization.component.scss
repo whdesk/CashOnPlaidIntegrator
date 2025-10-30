@@ -1,0 +1,24 @@
+.monei-wrap {
+  max-width: 520px;
+  margin: 24px auto;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.mode, .config, .actions, .result {
+  margin-top: 12px;
+}
+
+.config label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.card-container {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+  min-height: 54px;
+}

@@ -2,6 +2,8 @@
 <html lang="{{data.language}}">
 <head>
     <title>Gateway</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://api.paycomet.com 'unsafe-inline' 'unsafe-eval'; frame-src https://api.paycomet.com; connect-src 'self' https://api.paycomet.com http://localhost:5199; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+    
 </head>
 <body>
 <div class="container pull-left">
@@ -36,6 +38,8 @@
 <script src="/js/v1-card-iframe.js"></script>
 <script src="https://paylands-web-assets.s3-eu-west-1.amazonaws.com/js/v1-device.js"></script>
 <script src="https://paylands-web-assets.s3.eu-west-1.amazonaws.com/js/translations.js"></script>
+<!-- PayCOMET JET/iFrame script (loaded globally at end of body) -->
+<script src="https://api.paycomet.com/gateway/paycomet.jetiframe.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var tplLanguage = "{{data.language}}";

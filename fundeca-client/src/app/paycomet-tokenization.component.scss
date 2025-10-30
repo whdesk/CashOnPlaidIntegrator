@@ -1,0 +1,30 @@
+.paycomet-wrap {
+  padding: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.result {
+  margin-top: 0.75rem;
+}
+
+#paycometPaymentForm {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+label {
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+input[type="text"] {
+  padding: 0.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}

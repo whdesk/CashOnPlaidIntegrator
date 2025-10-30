@@ -1,0 +1,49 @@
+<div class="monei-wrap">
+  <h2>MONEI Tokenización (Sandbox)</h2>
+
+  <div class="config">
+    <h3>Crear Payment (backend) y montar CardInput</h3>
+    <label>
+      amount (céntimos):
+      <input type="number" [(ngModel)]="amount" />
+    </label>
+    <label>
+      currency:
+      <input type="text" [(ngModel)]="currency" />
+    </label>
+    <label>
+      orderId:
+      <input type="text" [(ngModel)]="orderId" placeholder="se autogenera si lo dejas vacío" />
+    </label>
+    <label>
+      callbackUrl:
+      <input type="text" [(ngModel)]="callbackUrl" />
+    </label>
+    <div class="actions">
+      <button (click)="createPaymentWithoutToken()" [disabled]="loading">{{ loading ? 'Creando pago...' : 'Crear Payment y montar CardInput' }}</button>
+    </div>
+  </div>
+
+  <div class="config" *ngIf="paymentId">
+    <label>
+      paymentId:
+      <input type="text" [ngModel]="paymentId" readonly />
+    </label>
+  </div>
+
+  <div class="actions" *ngIf="paymentId">
+    <button (click)="confirmPaymentAndSaveCard()" [disabled]="loading">{{ loading ? 'Confirmando...' : 'Confirmar y guardar tarjeta' }}</button>
+  </div>
+
+  <div id="monei-card-input" class="card-container"></div>
+
+  <div class="result" *ngIf="error">
+    <strong>Error:</strong> {{ error }}
+  </div>
+  <div class="result" *ngIf="token">
+    <strong>Token:</strong> {{ token }}
+  </div>
+  <div class="result" *ngIf="savedPaymentToken">
+    <strong>Token permanente:</strong> {{ savedPaymentToken }}
+  </div>
+</div>

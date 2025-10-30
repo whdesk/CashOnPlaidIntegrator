@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paycomet JetIframe Test</title>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 16px; }
+    .field { margin: 8px 0; display: flex; flex-direction: column; max-width: 360px; }
+    .jet { border:1px solid #cbd5e1; padding:.5rem; border-radius:6px; min-height:40px; }
+    button { padding: .5rem .75rem; border-radius: 6px; border: 1px solid #cbd5e1; background: #0ea5e9; color: white; }
+    .debug { margin-top: 12px; font-size: 14px; }
+    .ok { color: #16a34a; }
+    .bad { color: #dc2626; }
+  </style>
+</head>
+<body>
+  <h1>Paycomet JetIframe - Test mínimo</h1>
+  <p>Objetivo: comprobar que el SDK inyecta los iframes PAN/CVC y genera jetToken al enviar.</p>
+
+  <form id="paycometPaymentForm" method="POST">
+    <div class="field">
+      <label for="holder">Titular</label>
+      <input id="holder" type="text" data-paycomet="cardHolderName" />
+    </div>
+    <div class="field">
+      <label for="month">Mes (MM)</label>
+      <input id="month" type="text" data-paycomet="dateMonth" />
+    </div>
+    <div class="field">
+      <label for="year">Año (YY)</label>
+      <input id="year" type="text" data-paycomet="dateYear" />
+    </div>
+
+    <div class="field">
+      <label for="paycomet-pan">Número de tarjeta</label>
+      <div id="paycomet-pan" class="jet" data-paycomet="paNumber"></div>
+      <input type="text" id="old-pan-input" />
+    </div>
+
+    <div class="field">
+      <label for="paycomet-cvc2">CVC</label>
+      <div id="paycomet-cvc2" class="jet" data-paycomet="cvc2"></div>
+      <input type="text" id="old-CVC2-input" />
+    </div>
+
+    <input type="hidden" data-paycomet="jetID" value="X43MxRaWZFEShkM8gHDzzRFsGjQSB3se" />
+    <input type="hidden" data-paycomet="callback" value="paycometHandler" />
+
+    <div class="field">
+      <button type="submit">Guardar tarjeta (test)</button>
+    </div>
+  </form>
+
+  <div class="debug">
+    <div>SDK: <span id="sdk-status" class="bad">pendiente</span></div>
+    <div>PAN iframe cargado: <span id="pan-status" class="bad">false</span></div>
+    <div>CVC iframe cargado: <span id="cvc-status" class="bad">false</span></div>
+    <div>jetToken: <code id="token">(aún no)</code></div>
+  </div>
+
+  <script>
+    function updateStatus() {
+      const pan = !!document.querySelector('#paycomet-pan iframe');
+      const cvc = !!document.querySelector('#paycomet-cvc2 iframe');
+      document.getElementById('pan-status').textContent = pan;
+      document.getElementById('pan-status').className = pan ? 'ok' : 'bad';
+      document.getElementById('cvc-status').textContent = cvc;
+      document.getElementById('cvc-status').className = cvc ? 'ok' : 'bad';
+    }
+
+    window.paycometHandler = function(resp) {
+      console.log('[paycometHandler][test]', resp);
+      const token = resp && (resp.paytpvToken || resp.jetToken);
+      if (token) {
+        document.getElementById('token').textContent = token;
+      }
+    };
+
+    // Chequear periódicamente si los iframes aparecen
+    setInterval(updateStatus, 300);
+  </script>
+  <script src="https://api.paycomet.com/gateway/paycomet.jetiframe.js"></script>
+</body>
+</html>

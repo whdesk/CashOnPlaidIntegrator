@@ -54,12 +54,18 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IPaylandsApiService, PaylandsApiService>();
 
 builder.Services.AddControllers();
+// Swagger/OpenAPI
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 app.UseCors();
 app.UseRouting();
 app.UseAuthorization();
+// Swagger UI disponible en todas las configuraciones (útil para pruebas)
+app.UseSwagger();
+app.UseSwaggerUI();
 app.MapControllers();
 
 app.Run();

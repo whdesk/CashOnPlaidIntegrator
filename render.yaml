@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: plaidapi-test
+    env: docker
+    rootDir: PlaidApi
+    plan: free
+    autoDeploy: true
+    # Render will route traffic to the container's exposed port (8080)
+    envVars:
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:8080
+      - key: PORT
+        value: 8080
+      # Set the following in Render Dashboard with your real secrets
+      - key: PIBISI_BASE_URL
+        value: https://int.api.pibisi.com/v2
+      - key: PIBISI_AUTH_TOKEN
+        sync: false
+      - key: PAYLANDS_API_KEY
+        sync: false
+      - key: MONEI_API_KEY
+        sync: false
+      - key: PAYCOMET_API_KEY
+        sync: false
+      - key: PAYCOMET_TERMINAL
+        sync: false
+      - key: PAYCOMET_JET_PUBLIC_KEY
+        sync: false
+      - key: PAYCOMET_CUSTOMER_CODE
+        sync: false

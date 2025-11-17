@@ -2,6 +2,10 @@ using Refit;
 using PlaidApi.Services;
 using PlaidApi.Paylands;
 using PlaidApi.Monei;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,18 +58,18 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IPaylandsApiService, PaylandsApiService>();
 
 builder.Services.AddControllers();
-// Swagger/OpenAPI
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
-
-app.UseCors();
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+app.UseCors(); 
+app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
-// Swagger UI disponible en todas las configuraciones (útil para pruebas)
-app.UseSwagger();
-app.UseSwaggerUI();
 app.MapControllers();
 
 app.Run();

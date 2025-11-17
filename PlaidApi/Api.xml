@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PlaidApi</name>
+    </assembly>
+    <members>
+        <member name="T:Refit.Implementation.Generated">
+            <inheritdoc />
+        </member>
+        <member name="T:Refit.Implementation.Generated.PlaidApiMoneiIMoneiApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Refit.Implementation.Generated.PlaidApiMoneiIMoneiApi.Client">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiMoneiIMoneiApi.#ctor(System.Net.Http.HttpClient,Refit.IRequestBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiMoneiIMoneiApi.CreatePayment(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiMoneiIMoneiApi.ConfirmPayment(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiMoneiIMoneiApi.PlaidApi#Monei#IMoneiApi#CreatePayment(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiMoneiIMoneiApi.PlaidApi#Monei#IMoneiApi#ConfirmPayment(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Refit.Implementation.Generated.PlaidApiPaylandsIPaylandsApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Refit.Implementation.Generated.PlaidApiPaylandsIPaylandsApi.Client">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPaylandsIPaylandsApi.#ctor(System.Net.Http.HttpClient,Refit.IRequestBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPaylandsIPaylandsApi.CreateCustomer(PlaidApi.Paylands.CreateCustomerRequestBody)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPaylandsIPaylandsApi.PlaidApi#Paylands#IPaylandsApi#CreateCustomer(PlaidApi.Paylands.CreateCustomerRequestBody)">
+            <inheritdoc />
+        </member>
+        <member name="T:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.Client">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.#ctor(System.Net.Http.HttpClient,Refit.IRequestBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.GetCredentials(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.GetAccounts(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.RegisterCustomer(System.String,PlaidApi.Pibisi.PibisiCustomerFormData)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.GetCustomer(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.FindSubjectAsync(System.String,PlaidApi.Pibisi.PibisiCustomerFormData,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.PlaidApi#Pibisi#IPibisiApi#GetCredentials(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.PlaidApi#Pibisi#IPibisiApi#GetAccounts(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.PlaidApi#Pibisi#IPibisiApi#RegisterCustomer(System.String,PlaidApi.Pibisi.PibisiCustomerFormData)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.PlaidApi#Pibisi#IPibisiApi#GetCustomer(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPibisiIPibisiApi.PlaidApi#Pibisi#IPibisiApi#FindSubjectAsync(System.String,PlaidApi.Pibisi.PibisiCustomerFormData,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.Client">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.#ctor(System.Net.Http.HttpClient,Refit.IRequestBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.CreateLinkToken(PlaidApi.Plaid.PlaidLinkTokenRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.ExchangePublicToken(PlaidApi.Plaid.PlaidExchangeTokenRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.GetAuth(PlaidApi.Plaid.PlaidAuthRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.GetIdentity(PlaidApi.Plaid.PlaidIdentityRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.GetTransactions(PlaidApi.Plaid.PlaidTransactionsRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.PlaidApi#Plaid#IPlaidApi#CreateLinkToken(PlaidApi.Plaid.PlaidLinkTokenRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.PlaidApi#Plaid#IPlaidApi#ExchangePublicToken(PlaidApi.Plaid.PlaidExchangeTokenRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.PlaidApi#Plaid#IPlaidApi#GetAuth(PlaidApi.Plaid.PlaidAuthRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.PlaidApi#Plaid#IPlaidApi#GetIdentity(PlaidApi.Plaid.PlaidIdentityRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Refit.Implementation.Generated.PlaidApiPlaidIPlaidApi.PlaidApi#Plaid#IPlaidApi#GetTransactions(PlaidApi.Plaid.PlaidTransactionsRequest)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,10 @@
+:root { color-scheme: light dark; }
+body { margin: 0; padding: 0; font-family: Inter, system-ui, Arial; }
+#root { padding: 24px; }
+.card { border: 1px solid #4443; border-radius: 12px; padding: 16px; }
+.row { display: flex; align-items: center; gap: 12px; }
+.btn { background: #2563eb; color: white; border: 0; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+.error { color: #ef4444; }
+success { color: #16a34a; }
+.debug { margin-top: 12px; }

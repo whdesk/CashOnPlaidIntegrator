@@ -34,7 +34,7 @@ namespace PlaidApi.Controllers
             {
                 return BadRequest(new { error = "Faltan credenciales PAYCOMET (terminal/apiKey/jetPublicKey)" });
             }
-            if (string.IsNullOrWhiteSpace(request?.jetToken))
+            if (string.IsNullOrWhiteSpace(request?.JetToken))
             {
                 return BadRequest(new { error = "jetToken es requerido" });
             }
@@ -44,7 +44,9 @@ namespace PlaidApi.Controllers
             var payload = new
             {
                 terminal = terminal,
-                jetToken = request.jetToken
+                jetToken = request.JetToken,
+                cardHolderName = request.CardholderName,
+
             };
             var json = System.Text.Json.JsonSerializer.Serialize(payload);
             var resp = await http.PostAsync("v1/cards", new StringContent(json, System.Text.Encoding.UTF8, "application/json"));
@@ -89,10 +91,8 @@ namespace PlaidApi.Controllers
 
     public class AddCardRequest
     {
-        public string? jetToken { get; set; }
-        public string? signature { get; set; }
-        public string? customerEmail { get; set; }
-        public string? customerId { get; set; }
+        public string? JetToken { get; set; }
+        public string? CardholderName { get; set; }
     }
 
     public class ChargeTokenRequest

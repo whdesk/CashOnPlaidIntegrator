@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11123.170 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaidApi", "PlaidApi.csproj", "{472D272E-31FD-DCFB-0A3C-EFDD48BF519B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "..\WebApplication2\WebApplication2.csproj", "{9D134C16-B17A-459C-B29F-98A95B931AA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{472D272E-31FD-DCFB-0A3C-EFDD48BF519B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{472D272E-31FD-DCFB-0A3C-EFDD48BF519B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{472D272E-31FD-DCFB-0A3C-EFDD48BF519B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D134C16-B17A-459C-B29F-98A95B931AA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D134C16-B17A-459C-B29F-98A95B931AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D134C16-B17A-459C-B29F-98A95B931AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D134C16-B17A-459C-B29F-98A95B931AA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

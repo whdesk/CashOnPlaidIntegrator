@@ -153,23 +153,23 @@ export default function RedsysInSiteUnified() {
 
       const form = document.createElement('form')
       form.method = 'POST'
-      form.action = data.FormUrl
+      form.action = data.formUrl || data.FormUrl
       form.style.display = 'none'
 
       const i1 = document.createElement('input')
       i1.type = 'hidden'
       i1.name = 'Ds_SignatureVersion'
-      i1.value = data.Ds_SignatureVersion
+      i1.value = data.Ds_SignatureVersion || data.ds_SignatureVersion
 
       const i2 = document.createElement('input')
       i2.type = 'hidden'
       i2.name = 'Ds_MerchantParameters'
-      i2.value = data.Ds_MerchantParameters
+      i2.value = data.Ds_MerchantParameters || data.ds_MerchantParameters
 
       const i3 = document.createElement('input')
       i3.type = 'hidden'
       i3.name = 'Ds_Signature'
-      i3.value = data.Ds_Signature
+      i3.value = data.Ds_Signature || data.ds_Signature
 
       form.appendChild(i1)
       form.appendChild(i2)
@@ -198,10 +198,26 @@ export default function RedsysInSiteUnified() {
           <label>Order (D12)</label>
           <input
             value={order}
-            onChange={(e) => setOrder(e.target.value.replace(/\D/g, '').slice(0, 12).padStart(12, '0'))}
+            onChange={(e) => {
+              const next = e.target.value.replace(/\D/g, '').slice(0, 12).padStart(12, '0')
+              setOrder(next)
+              setIdOper('')
+              setErrorCode('')
+              setReady(false)
+            }}
             style={{ marginLeft: 8 }}
           />
-          <button style={{ marginLeft: 8 }} onClick={() => setOrder(generateOrderD12())}>Nuevo</button>
+          <button
+            style={{ marginLeft: 8 }}
+            onClick={() => {
+              setOrder(generateOrderD12())
+              setIdOper('')
+              setErrorCode('')
+              setReady(false)
+            }}
+          >
+            Nuevo
+          </button>
         </div>
         <div>
           <label>Importe (€)</label>
@@ -222,6 +238,7 @@ export default function RedsysInSiteUnified() {
         style={{
           marginTop: 12,
           minHeight: 420,
+          display: 'grid',
           border: '1px solid #e5e7eb',
           borderRadius: 6,
           padding: 8,

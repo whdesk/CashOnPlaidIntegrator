@@ -311,16 +311,73 @@ app.MapPost("/redsys/mit/charge", (MitChargeRequest req, IConfiguration cfg, Red
     });
 });
 
+// Inicia un pago Bizum por redirección: genera los tres campos para postear al SIS
+app.MapPost("/redsys/bizum/start", (BizumStartRequest req, IConfiguration cfg, RedsysSignatureService signer) =>
+{
+    var settings = cfg.GetSection("Redsys").Get<RedsysSettings>()!;
+
+    if (req.Amount <= 0)
+        return Results.BadRequest("Amount inválido");
+
+    var order = string.IsNullOrWhiteSpace(req.Order) ? GenerateOrder() : req.Order!;
+
+    var merchantParams = new Dictionary<string, object?>
+    {
+        ["DS_MERCHANT_MERCHANTCODE"] = settings.MerchantCode,
+        ["DS_MERCHANT_TERMINAL"] = settings.Terminal,
+        ["DS_MERCHANT_ORDER"] = order,
+        ["DS_MERCHANT_AMOUNT"] = req.Amount.ToString(),
+        ["DS_MERCHANT_CURRENCY"] = settings.Currency,
+        // Estos valores deben alinearse con la configuración Bizum de tu entidad
+        ["DS_MERCHANT_TRANSACTIONTYPE"] = settings.BizumTransactionType,
+        ["DS_MERCHANT_PAYMETHODS"] = settings.BizumPayMethods,
+        ["DS_MERCHANT_MERCHANTURL"] = settings.MerchantUrl,
+        ["DS_MERCHANT_URLOK"] = settings.UrlOk,
+        ["DS_MERCHANT_URLKO"] = settings.UrlKo
+    };
+
+    if (!string.IsNullOrWhiteSpace(settings.ConsumerLanguage))
+        merchantParams["DS_MERCHANT_CONSUMERLANGUAGE"] = settings.ConsumerLanguage;
+
+    if (!string.IsNullOrWhiteSpace(req.Phone))
+        merchantParams["DS_MERCHANT_BIZUM_MOBILENUMBER"] = req.Phone;
+
+    var dsParams = signer.BuildMerchantParametersBase64(merchantParams);
+    var signature = signer.BuildSignatureUrlSafe(dsParams, settings.SecretKeyBase64!, order);
+
+    try { app.Logger.LogInformation("BIZUM START order={order} decoded={decoded}", order, signer.Base64ToJson(dsParams)); } catch { }
+
+    return Results.Ok(new
+    {
+        FormUrl = settings.SisUrl!,
+        Ds_SignatureVersion = "HMAC_SHA256_V1",
+        Ds_MerchantParameters = dsParams,
+        Ds_Signature = signature,
+        Order = order
+    });
+});
+
 // Autoriza operación InSite usando DS_MERCHANT_IDOPER y el mismo ORDER que se usó al generar el ID de operación
 app.MapPost("/redsys/insite/authorize", (InSiteAuthorizeRequest req, IConfiguration cfg, RedsysSignatureService signer) =>
 {
     var settings = cfg.GetSection("Redsys").Get<RedsysSettings>()!;
+
     if (string.IsNullOrWhiteSpace(req.IdOper))
         return Results.BadRequest("IdOper requerido");
     if (string.IsNullOrWhiteSpace(req.Order))
         return Results.BadRequest("Order requerido (mismo usado en carga InSite)");
     if (req.Amount <= 0)
         return Results.BadRequest("Amount inválido");
+
+    if (string.IsNullOrWhiteSpace(settings.MerchantCode) ||
+        string.IsNullOrWhiteSpace(settings.Terminal) ||
+        string.IsNullOrWhiteSpace(settings.SecretKeyBase64) ||
+        string.IsNullOrWhiteSpace(settings.SisUrl))
+    {
+        return Results.BadRequest("Configuración Redsys incompleta (MerchantCode/Terminal/SecretKeyBase64/SisUrl)");
+    }
+
+    var payMethods = string.IsNullOrWhiteSpace(settings.PayMethods) ? "C" : settings.PayMethods;
 
     var merchantParams = new Dictionary<string, object?>
     {
@@ -331,6 +388,7 @@ app.MapPost("/redsys/insite/authorize", (InSiteAuthorizeRequest req, IConfigurat
         ["DS_MERCHANT_CURRENCY"] = settings.Currency,
         ["DS_MERCHANT_TRANSACTIONTYPE"] = "0", // Autorización
         ["DS_MERCHANT_IDOPER"] = req.IdOper,
+        ["DS_MERCHANT_PAYMETHODS"] = payMethods,
         ["DS_MERCHANT_MERCHANTURL"] = settings.MerchantUrl,
         ["DS_MERCHANT_URLOK"] = settings.UrlOk,
         ["DS_MERCHANT_URLKO"] = settings.UrlKo
@@ -408,6 +466,8 @@ public sealed class RedsysSettings
     public string? CofIniForTokenization { get; set; } = "Y";
     public string? CofType { get; set; } = "R";
     public string? ConsumerLanguage { get; set; }
+    public string? BizumTransactionType { get; set; }
+    public string? BizumPayMethods { get; set; }
 }
 
 public sealed class TokenizeStartResponse
@@ -592,4 +652,11 @@ public sealed class InSiteAuthorizeRequest
     public required string IdOper { get; set; }
     public required string Order { get; set; }
     public int Amount { get; set; } // en céntimos
+}
+
+public sealed class BizumStartRequest
+{
+    public int Amount { get; set; } // en céntimos
+    public string? Order { get; set; }
+    public string? Phone { get; set; }
 }

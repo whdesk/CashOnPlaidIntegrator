@@ -1,0 +1,1143 @@
+TPV-Virtual
+
+Guía de Integración BIZUM comercios SIS
+
+
+
+
+Versión: 1.6
+Fecha: 14/06/2022
+Referencia: RS.TE.CEL.MAN.0033
+
+
+
+
+ Redsys, Servicios de Procesamiento, S.L. – c/ Francisco Sancha, 12 – 28034 Madrid (España)
+                                      www.redsys.es
+                                                                                                                             Referencia: RS.TE.CEL.MAN.0033                                                   Versión: 1.6
+                                                                                                                             Autor: Redsys                                                                 Página:2 de 26
+                                                                                                                             Área propietaria: Comercio Electrónico                                    Fecha: 14/06/2022
+
+
+
+
+                                                                                                                             Versión         Fecha               Afecta             Breve descripción del cambio
+
+                                                                                                                             1.0             10/01/2019          TODO               Versión Inicial
+
+                                                                                                                             1.1             10/10/2019          Punto 4            Se añade el punto 4.
+
+                                                                                                                                                                                    Se añaden datos para entorno de
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                             1.2             14/11/2019          Punto 3.1
+                                                                                                                                                                                    pruebas.
+
+                                                                                                                             1.2.1           20/05/2020          Doble Flujo        Se elimina generación de referencia.
+
+                                                                                                                                                                                    Se incluye parametrización específica
+                                                                                                                             1.3             08/01/2021          Punto 3            para informar teléfono móvil del
+                                                                                                                                                                                    cliente.
+
+                                                                                                                                                                                    Se incluyen la referencia al tipo de
+                                                                                                                             1.4             23/04/2021          Punto 3            conexión host to host en operativa de
+                                                                                                                                                                                    doble flujo y en devolución.
+
+                                                                                                                                                                                    Se incluyen especificaciones de
+                                                                                                                             1.5             28/09/2021          Puntos 5 y 6
+                                                                                                                                                                                    integración REST
+
+                                                                                                                                                                                    Se incluyen punto 7 con nuevas
+                                                                                                                             1.6             14/06/2022          Puntos 7
+                                                                                                                                                                                    funcionalidades REST
+
+
+
+
+                                                                                                                             TPV-Virtual                                        Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                              Versión: 1.6
+                                                                                                                              Autor: Redsys                                                           Página:3 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                               Fecha: 14/06/2022
+
+
+                                                                                                                             ÍNDICE
+
+
+                                                                                                                                 INTRODUCCIÓN                                                                        5
+
+                                                                                                                                 OPERATIVA                                                                           6
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                             2.1 DESCRIPCIÓN                                                                         6
+                                                                                                                             2.2 PROCEDIMIENTO                                                                       6
+
+                                                                                                                                 ESPECIFICACIONES TÉCNICAS – INTEGRACIÓN REDIRECCIÓN                                 7
+
+                                                                                                                             3.1 INCLUSIÓN DEL BOTÓN BIZUM EN LA WEB DEL COMERCIO                                    7
+                                                                                                                             3.2 OPERATIVA DE PAGO                                                                   7
+                                                                                                                             3.3 OPERATIVA DE DEVOLUCIÓN                                                             9
+
+                                                                                                                                 ENTORNO DE PRUEBAS – INTEGRACIÓN REDIRECCIÓN                                        9
+
+                                                                                                                                 ESPECIFICACIONES TÉCNICAS – INTEGRACIÓN REST                                       11
+
+                                                                                                                             5.1 SOLICITUD DE CONSULTA RTP                                                          11
+                                                                                                                             5.1.1 PARÁMETROS DE ENTRADA                                                            11
+                                                                                                                             5.1.2 PARÁMETROS DE SALIDA                                                             12
+                                                                                                                             5.1.3 EJEMPLO                                                                          13
+                                                                                                                             5.2 INICIO SOLICITUD PAGO RTP VÍA REST                                                 14
+                                                                                                                             5.2.1 PARÁMETROS DE ENTRADA                                                            14
+                                                                                                                             5.2.2 PARÁMETROS DE SALIDA                                                             15
+                                                                                                                             5.2.3 EJEMPLO                                                                          16
+                                                                                                                             5.3 CÓDIGOS DE ERROR ASOCIADOS                                                         19
+
+                                                                                                                                 REALIZACIÓN DE PRUEBAS – INTEGRACIÓN REST                                          20
+
+                                                                                                                                 OTRAS FUNCIONALIDADES REST                                                         21
+
+                                                                                                                             7.1 DEVOLUCIÓN SIN ORIGINAL                                                            21
+                                                                                                                             7.1.1 PARÁMETROS DE ENTRADA                                                            21
+                                                                                                                             7.1.2 PARÁMETROS DE SALIDA                                                             21
+                                                                                                                             7.1.3 EJEMPLO                                                                          22
+
+                                                                                                                                 GESTIÓN DE OPERACIONES BIZUM DESDE EL PORTAL DE ADMINISTRACIÓN DEL TPV-
+                                                                                                                             VIRTUAL                                                                     24
+
+
+
+
+                                                                                                                              TPV-Virtual                                    Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                        Versión: 1.6
+                                                                                                                              Autor: Redsys                                                     Página:4 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                         Fecha: 14/06/2022
+
+
+                                                                                                                             8.1 CONSULTA DE OPERACIONES DE BIZUM                                             24
+                                                                                                                             8.2 DEVOLUCIÓN DE OPERACIONES DE BIZUM                                           25
+
+                                                                                                                                 CONSULTAS OPERATIVAS Y DE FUNCIONAMIENTO                                     26
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                              TPV-Virtual                              Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                    Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                  Página:5 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                      Fecha: 14/06/2022
+
+
+                                                                                                                                               Introducción
+
+                                                                                                                             Esta guía describe las modificaciones que debe hacer un comercio para poder ofrecer la solución
+                                                                                                                             de pago BIZUM.
+                                                                                                                             El botón de BIZUM debe ofrecerse a los titulares en la web del comercio. Implica que el comercio
+                                                                                                                             tiene que realizar modificaciones en su página web para permitir a los titulares que estén
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                             comprando en el comercio ver esta opción junto al resto de opciones de pago que ofrece.
+
+
+
+
+                                                                                                                              TPV-Virtual                                        Guía de Integración BIZUM comercios SIS
+                                                                                                                             Referencia: RS.TE.CEL.MAN.0033                                                    Versión: 1.6
+                                                                                                                             Autor: Redsys                                                                  Página:6 de 26
+                                                                                                                             Área propietaria: Comercio Electrónico                                      Fecha: 14/06/2022
+
+
+                                                                                                                                              Operativa
+
+                                                                                                                                         2.1         Descripción
+                                                                                                                                El comercio debe realizar cambios para que en el proceso de compra final (checkout) BIZUM
+                                                                                                                                se muestre como una opción más de pago en su web.
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                Si el comercio dispone de una de las soluciones de comercio electrónico del mercado
+                                                                                                                                (Prestashop, Zen Cart, WooCommerce, OsCommerce …) debe incluir un módulo que permita
+                                                                                                                                esta conexión.
+                                                                                                                                Un ejemplo ilustrativo de la integración con Bizum sería la que se muestra en la siguiente
+                                                                                                                                imagen:
+
+
+
+
+                                                                                                                                         2.2         Procedimiento
+                                                                                                                                Los pasos necesarios para que un comercio pueda ofrecer BIZUM son básicamente estos tres
+                                                                                                                                puntos:
+                                                                                                                                    1. El comercio debe tener activada por su entidad financiera la posibilidad de pagar con
+                                                                                                                                       BIZUM.
+                                                                                                                                    2. El comercio debe incluir en su página web el botón que identifica el pago mediante
+                                                                                                                                       BIZUM.
+                                                                                                                                    3. Realizar una llamada al TPV Virtual con un formato concreto y muy sencillo de
+                                                                                                                                       implementar.
+
+
+
+
+                                                                                                                             TPV-Virtual                                        Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                       Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                     Página:7 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                         Fecha: 14/06/2022
+
+
+                                                                                                                                               Especificaciones                  técnicas           –        Integración
+                                                                                                                                               Redirección
+
+                                                                                                                             Para poder ofrecer el pago con BIZUM a través del TPV virtual se deben realizar unas pequeñas
+                                                                                                                             modificaciones en el servidor del comercio.
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                          3.1         Inclusión del botón BIZUM en la web del comercio
+                                                                                                                                     Además de los métodos de pago distintos de tarjeta con los que ya puede estar trabajando,
+                                                                                                                                     deberá incluir un botón de pago con BIZUM a través del TPV virtual junto al resto de
+                                                                                                                                     opciones.
+                                                                                                                                     Podrá utilizarse cualquiera de estas dos imágenes:
+
+
+
+
+                                                                                                                                     Estos botones se incluyen en un zip que se puede descargar en la misma sección de
+                                                                                                                                     documentación en la que se encuentra este documento. El zip tiene el siguiente nombre:
+                                                                                                                                     Botones Bizum.7z
+
+
+
+                                                                                                                                          3.2         Operativa de pago
+                                                                                                                                     En el momento que el cliente pulse el botón de pago, se debe generar una petición idéntica
+                                                                                                                                     a una petición estándar realizada al TPV Virtual (petición mediante una conexión por
+                                                                                                                                     Redirección). En dicha petición se deberá incluir el siguiente campo:
+
+                                                                                                                                                              Ds_Merchant_PayMethods cuyo valor será
+                                                                                                                                                            la letra "z" minúscula para el pago con BIZUM.
+
+
+
+                                                                                                                                     La operativa Bizum tiene dos comportamientos diferentes atendiendo al tipo de
+                                                                                                                                     transacción que se desee realizar:
+                                                                                                                                          a.   Pago Bizum estándar: En esta operativa Bizum el TPV Virtual realiza una
+                                                                                                                                               autenticación del cliente y la petición de autorización en una misma operación.
+                                                                                                                                               Para utilizar esta modalidad el comercio deberá especificar el siguiente campo en
+                                                                                                                                               la petición al TPV Virtual:
+
+
+                                                                                                                                                                       Ds_Merchant_TransactionType = 0
+
+
+
+
+                                                                                                                              TPV-Virtual                                          Guía de Integración BIZUM comercios SIS
+                                                                                                                             Referencia: RS.TE.CEL.MAN.0033                                                            Versión: 1.6
+                                                                                                                             Autor: Redsys                                                                          Página:8 de 26
+                                                                                                                             Área propietaria: Comercio Electrónico                                           Fecha: 14/06/2022
+
+
+
+
+                                                                                                                                              NOTA: El formato del parámetro “Ds_Merchant_Order”, número de pedido que
+                                                                                                                                              se envía en la petición, debe tener este formato.
+
+
+
+
+                                                                                                                                               Campo                      Descripción       Tipo             Formato
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                               Ds_Merchant_Order          Nº De pedido      Alfanumérico     ^[a-zA-Z0-9]{4,12}$
+                                                                                                                                                                                                             Ej. 123456Ebf
+
+
+
+
+                                                                                                                                         b.   Pago Bizum de doble flujo: La referencia del doble flujo indica que el comercio
+                                                                                                                                              tiene la posibilidad de realizar de manera separada la autenticación y la
+                                                                                                                                              autorización de la operación del cliente. La diferencia con el Pago Bizum estándar
+                                                                                                                                              está en el tipo de transacción (Ds_Merchant_TransactionType) enviado en la
+                                                                                                                                              petición al TPV Virtual (petición mediante una conexión por Redirección).
+                                                                                                                                              NOTA: Opción NO disponible para soluciones de comercio electrónico como
+                                                                                                                                              (Prestashop, Zen Cart, WooCommerce, OsCommerce …)
+
+
+                                                                                                                                              Una vez realizada la autenticación, el comercio tiene máximo 30 días para lanzar
+                                                                                                                                              la autorización de la operación. Pasado ese tiempo, la autorización no se hará
+                                                                                                                                              efectiva. (petición mediante una conexión REST)
+
+
+                                                                                                                                              Para estas dos fases se deben utilizar los siguientes tipos de transacción:
+                                                                                                                                              Fase 1. Autenticación (se debe realizar con una conexión al TPV Virtual por
+                                                                                                                                              redirección)
+                                                                                                                                              Para realizar la autenticación se deberá incluir el siguiente campo:
+
+
+                                                                                                                                                                      Ds_Merchant_TransactionType = 7
+
+
+
+
+                                                                                                                                              Fase 2. Autorización (se debe realizar con una conexión al TPV Virtual vía REST)
+                                                                                                                                              Para realizar la autorización se deberá incluir el siguiente campo:
+
+
+                                                                                                                                                                      Ds_Merchant_TransactionType = 8
+
+
+
+
+                                                                                                                             TPV-Virtual                                            Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                       Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                     Página:9 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                         Fecha: 14/06/2022
+
+
+
+
+                                                                                                                                     Opcionalmente, el comercio podrá informar el número de teléfono móvil del cliente para
+                                                                                                                                     que aparezca automáticamente completado en el entorno de Bizum. Para ello, deberá
+                                                                                                                                     informar el número del teléfono móvil en el siguiente campo del formulario:
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                                                        Ds_Merchant_Bizum_MobileNumber
+                                                                                                                                                               cuyo valor será el número de teléfono móvil
+                                                                                                                                                               incluyendo el prefijo (por ejemplo +34700000000)
+
+
+
+
+                                                                                                                                     NOTA: Los detalles técnicos para realizar una petición por Redirección o REST se encuentran
+                                                                                                                                     en las siguientes guías: “TPV-Virtual Manual Integración - Redirección.pdf” y “TPV-Virtual
+                                                                                                                                     Manual Integración -REST.pdf”.
+
+
+
+                                                                                                                                          3.3         Operativa de devolución
+                                                                                                                                     La devolución de una operación Bizum se puede realizar mediante una petición REST
+                                                                                                                                     enviando el siguiente campo:
+
+
+                                                                                                                                                                       Ds_Merchant_TransactionType = 3
+
+
+
+
+                                                                                                                                     También se puede realizar la devolución de la operación de autorización a través del Portal
+                                                                                                                                     de Administración del Tpv Virtual. Ver punto 4.2
+
+
+
+
+                                                                                                                                               Entorno de pruebas – Integración Redirección
+
+                                                                                                                             Existe un entorno de test que permite realizar las pruebas necesarias para verificar el correcto
+                                                                                                                             funcionamiento del sistema antes de hacer la implantación en el entorno real.
+                                                                                                                                 La URL de acceso para el entorno de test es:
+                                                                                                                                     https://sis-t.redsys.es:25443/sis/realizarPago
+
+
+                                                                                                                                 La URL para el acceso al Portal de Administración, en el entorno de test es:
+
+
+
+
+                                                                                                                              TPV-Virtual                                          Guía de Integración BIZUM comercios SIS
+                                                                                                                             Referencia: RS.TE.CEL.MAN.0033                                                         Versión: 1.6
+                                                                                                                             Autor: Redsys                                                                      Página:10 de 26
+                                                                                                                             Área propietaria: Comercio Electrónico                                          Fecha: 14/06/2022
+
+
+                                                                                                                                    https://sis-t.redsys.es:25443/canales
+
+
+                                                                                                                                Datos de prueba:
+
+                                                                                                                                     Usuario BIZUM                    Caso de prueba
+
+                                                                                                                                     700000000                        Compra con éxito
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                     ko@ko.ko                         Compra rechazada (error autenticación clave Bizum)
+
+
+
+                                                                                                                                NOTA: Los pagos realizados en el entorno de test no tendrán validez contable.
+
+
+
+
+                                                                                                                             TPV-Virtual                                               Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                        Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                    Página:11 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                         Fecha: 14/06/2022
+
+
+                                                                                                                                               Especificaciones técnicas – Integración REST
+
+                                                                                                                             Para poder realizar la operativa BIZUM vía REST, el cliente (titular) debe poder aceptar Request
+                                                                                                                             To Pay, lo cual consiste en el envío de una notificación al teléfono del cliente para aceptar desde
+                                                                                                                             el mismo el pago.
+                                                                                                                             Para saber si el cliente dispone de esta operativa, se ha habilitado un servicio de consulta RTP,
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                             donde el comercio puede consultar las operativas permitidas por el cliente. Mediante este servicio,
+                                                                                                                             el comercio puede saber si:
+
+                                                                                                                                    El cliente tiene el servicio de BIZUM y Request To Pay. En este caso, se podrá solicitar el
+                                                                                                                                     pago BIZUM vía REST como se explica más adelante o vía redirección, como se explicó en
+                                                                                                                                     puntos anteriores.
+
+                                                                                                                                    El cliente tiene el servicio BIZUM, pero no Request To Pay. En este caso, se podrá solicitar
+                                                                                                                                     el pago BIZUM vía redirección únicamente.
+
+                                                                                                                                    El cliente no tiene el servicio BIZUM. En este caso, no se podrá solicitar el pago BIZUM al
+                                                                                                                                     cliente.
+
+                                                                                                                                          5.1         Solicitud de consulta RTP
+                                                                                                                                          5.1.1 Parámetros de entrada
+                                                                                                                             Los parámetros necesarios para poder consumir el servicio de consulta son los siguientes:
+
+                                                                                                                              Campo                                           Descripción      Tipo             Formato
+
+                                                                                                                              DS_MERCHANT_ORDER                               Nº De pedido     Alfanumérico     ^[a-zA-Z0-
+                                                                                                                                                                                                                9]{4,12}$
+
+                                                                                                                              DS_MERCHANT_MERCHANTCODE                        Nº De            Numérico         ^[\d]{1,9}$
+                                                                                                                                                                              comercio
+
+                                                                                                                              DS_MERCHANT_TERMINAL                            Nº De            Numérico         ^[\d]{1,3}$
+                                                                                                                                                                              terminal
+
+                                                                                                                              DS_MERCHANT_CURRENCY                            Código ISO       Numérico         ^[\d]{3}$
+                                                                                                                                                                              4217 de la
+                                                                                                                                                                              moneda
+
+                                                                                                                              DS_MERCHANT_AMOUNT                              Importe del      Numérico         ^[\d]{1,12}$
+                                                                                                                                                                              pedido sin
+                                                                                                                                                                                                                Ej: 100 sería 1€
+                                                                                                                                                                              decimales
+
+                                                                                                                              DS_MERCHANT_BIZUM_MOBILENUMBER                  Teléfono del     Cadena           ^[\+]?[\d]{5,15}$
+                                                                                                                                                                              cliente con
+                                                                                                                                                                                                                Ej: +
+                                                                                                                                                                              prefijo
+                                                                                                                                                                                                                34700000000
+
+
+
+
+                                                                                                                              TPV-Virtual                                          Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                      Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                  Página:12 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                       Fecha: 14/06/2022
+
+
+                                                                                                                             Como en cualquier tipo de integración REST, el comercio debe enviar una petición POST con los
+                                                                                                                             siguientes parámetros:
+
+                                                                                                                                    Ds_MerchantParameters: Datos de la petición de pago codificados en Base64.
+
+                                                                                                                                    Ds_SignatureVersion: Versión del algoritmo de firma.
+                                                                                                                                    Ds_Signature: Firma generada con los datos de pago.
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                             La URL de donde está expuesto el servicio para el entorno de test es:
+                                                                                                                                    https://sis-t.redsys.es:25443/sis/rest/RTP/checkRtpUsuario
+
+
+                                                                                                                                          5.1.2 Parámetros de salida
+                                                                                                                             En este caso, los campos más importantes serán los que comiencen por Ds_Rtp:
+
+                                                                                                                                    Ds_RtpStatus: Indica si el cliente puede hacer Request to Pay. Sus posibles valores son
+                                                                                                                                     ‘OK’ en caso de poder y ‘KO’ en caso de no poder. En caso de devolver ‘KO’ se debe
+                                                                                                                                     consultar el campo ‘Ds_RtpResponse’ para verificar si la respuesta recibida es debido a un
+                                                                                                                                     error o no. Por ejemplo, en caso de que el usuario tenga Bizum pero no Request to Pay, el
+                                                                                                                                     ‘Ds_RtpResponse’ vendrá con el código ‘BIZ00000’ mientras que si el usuario no tiene
+                                                                                                                                     directamente Bizum, vendrá con un código de error distinto.
+
+                                                                                                                                    Ds_RtpResponse: Código de la petición de consulta de estado de Request to Pay. En caso
+                                                                                                                                     de que la petición sea correcta, se devolverá ‘BIZ00000’. En caso contrario, se devolverá
+                                                                                                                                     otro código de error siguiendo la siguiente expresión regular ‘^BIZ[\d]{5}$’.
+
+                                                                                                                                    Ds_RtpDescription: Descripción de la petición de consulta de estado de Request to Pay.
+                                                                                                                                     En caso de que el campo ‘Ds_RtpResponse’ venga con un valor distinto a ‘BIZ00000’, este
+                                                                                                                                     campo indicará una descripción del motivo por cuál no se ha producido la petición
+                                                                                                                                     correctamente.
+                                                                                                                             Las posibles casuísticas que pueden aparecer son las siguientes:
+
+                                                                                                                                    Cliente con RequestToPay: En este caso, la llamada devolverá Ds_RtpStatus=OK,
+                                                                                                                                     Ds_RtpResponse=BIZ00000, Ds_RtpDescription=Operacion realizada correctamente
+
+                                                                                                                                    Cliente sin RequestToPay pero con Bizum: En este caso, la llamada devolverá
+                                                                                                                                     Ds_RtpStatus=KO,      Ds_RtpResponse=BIZ00000,  Ds_RtpDescription=Operacion
+                                                                                                                                     realizada correctamente
+
+                                                                                                                                    Cliente sin RequestToPay ni Bizum: En este caso, la llamada devolverá Ds_RtpStatus=KO,
+                                                                                                                                     Ds_RtpResponse=BIZ00009, Ds_RtpDescription=Ordenante no encontrado
+
+                                                                                                                                    Error de algún tipo: Si ocurre un error, la llamada devolverá Ds_RtpStatus=KO,
+                                                                                                                                     Ds_RtpResponse=BIZXXXXX (Siendo XXXXX el identificador del error en cuestión) y
+                                                                                                                                     Ds_RtpDescription=YYYYY (Siendo YYYYY la descripción detallada del error ocurrido)
+
+
+
+
+                                                                                                                              TPV-Virtual                                         Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                       Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                    Página:13 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                      Fecha: 14/06/2022
+
+
+                                                                                                                                            5.1.3 Ejemplo
+                                                                                                                             De esta manera podemos generar el siguiente ejemplo:
+
+                                                                                                                                       Datos del pago (Ds_MerchantParameters antes de codificar en base64):
+                                                                                                                              {
+                                                                                                                                      "DS_MERCHANT_ORDER": "1612280107",
+                                                                                                                                      "DS_MERCHANT_MERCHANTCODE": "999008881",
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                      "DS_MERCHANT_TERMINAL": "871",
+                                                                                                                                      "DS_MERCHANT_CURRENCY": "978",
+                                                                                                                                      "DS_MERCHANT_AMOUNT": "145",
+                                                                                                                                      "DS_MERCHANT_BIZUM_MOBILENUMBER": "+34717003409"
+                                                                                                                              }
+
+                                                                                                                                       Datos de la petición a enviar:
+                                                                                                                              {
+                                                                                                                                  "Ds_MerchantParameters": "eyJEU19NRVJDSEFOVF9PUkRFUiI6IjE2MTIyODAxMDciLCJEU19NR
+                                                                                                                              VJDSEFOVF9NRVJDSEFOVENPREUiOiI5OTkwMDg4ODEiLCJEU19NRVJDSEFOVF9URVJNSU5BTCI6Ijg3MSIs
+                                                                                                                              IkRTX01FUkNIQU5UX0NVUlJFTkNZIjoiOTc4IiwiRFNfTUVSQ0hBTlRfQU1PVU5UIjoiMTQ1IiwiRFNfTUV
+                                                                                                                              SQ0hBTlRfQklaVU1fTU9CSUxFTlVNQkVSIjoiKzM0NzE3MDAzNDA5In0=",
+                                                                                                                                      "Ds_Signature": "ILrP1d5dJ2joVf3hH/u2rhPVeF5Xtc7SfdhA3gJ6vLI=",
+                                                                                                                                      "Ds_SignatureVersion": "HMAC_SHA256_V1"
+                                                                                                                              }
+
+                                                                                                                             Esto producirá la siguiente respuesta:
+
+                                                                                                                                       Datos recibidos:
+                                                                                                                              {
+                                                                                                                                      "Ds_SignatureVersion": "HMAC_SHA256_V1",
+                                                                                                                                  "Ds_MerchantParameters": "eyJEc19SdHBTdGF0dXMiOiJPSyIsIkRzX1J0cFJlc3BvbnNlIjoiQ
+                                                                                                                              klaMDAwMDAiLCJEc19SdHBEZXNjcmlwdGlvbiI6Ik9wZXJhY2lvbiByZWFsaXphZGEgY29ycmVjdGFtZW50
+                                                                                                                              ZSIsIkRzX01lcmNoYW50Q29kZSI6Ijk5OTAwODg4MSIsIkRzX1Rlcm1pbmFsIjoiODcxIiwiRHNfT3JkZXI
+                                                                                                                              iOiIxNjEyMjgwNTA1IiwiRHNfQ3VycmVuY3kiOiI5NzgiLCJEc19BbW91bnQiOiIxNDUifQ==",
+                                                                                                                                      "Ds_Signature": "pY/CFIPG82sjlBzVBILkSF54l5BI5Ovqfv1IqNhMopY="
+                                                                                                                              }
+
+                                                                                                                                       Datos decodificados:
+                                                                                                                              {
+                                                                                                                                      "Ds_RtpStatus": "OK",
+                                                                                                                                      "Ds_RtpResponse": "BIZ00000",
+                                                                                                                                      "Ds_RtpDescription": "Operacion realizada correctamente",
+                                                                                                                                      "Ds_MerchantCode": "999008881",
+                                                                                                                                      "Ds_Terminal": "871",
+                                                                                                                                      "Ds_Order": "1612280505",
+                                                                                                                                      "Ds_Currency": "978",
+                                                                                                                                      "Ds_Amount": "145"
+                                                                                                                              }
+
+
+
+
+                                                                                                                              TPV-Virtual                                         Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                          Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                     Página:14 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                          Fecha: 14/06/2022
+
+
+                                                                                                                                          5.2         Inicio solicitud pago RTP vía REST
+                                                                                                                             El flujo de integración vía REST de Bizum sigue el siguiente esquema:
+                                                                                                                                 1. El comercio solicita el inicio de Request To Pay.
+                                                                                                                                 2. Se intenta realizar el inicio de Request To Pay.
+                                                                                                                                          a.   El cliente tiene activo RTP y la comunicación con la entidad se ha producido
+                                                                                                                                               correctamente: Respondemos con el éxito del intento del inicio de RTP enviando
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                               el campo Ds_RtpResponse=BIZ00000 y Ds_RtpDescription=Operacion
+                                                                                                                                               realizada correctamente
+                                                                                                                                          b.   Cualquier otra situación: Respondemos con el error del intento del inicio de RTP
+                                                                                                                                               enviando el campo Ds_RtpResponse=BIZXXXXX (Siendo XXXXX el identificador
+                                                                                                                                               del error en cuestión) y Ds_RtpDescription=YYYYY (Siendo YYYYY la descripción
+                                                                                                                                               detallada del error ocurrido)
+                                                                                                                                 3. En caso de que el inicio de RTP haya sido satisfactorio, cuando se confirme / deniegue la
+                                                                                                                                    solicitud el sistema recibirá una notificación con el resultado de esta, y en función de este
+                                                                                                                                    y del tipo de operación a procesar se realizará una acción u otra.
+                                                                                                                                          a.   Confirmación:
+                                                                                                                                                    i. Tipo de operación 0: Se procederá a autorizar la operación y se actualizará
+                                                                                                                                                       el estado de la operación con el resultado de la autorización.
+                                                                                                                                                   ii. Tipo de operación 7: Se actualizará el estado de la operación quedando
+                                                                                                                                                       autenticada y estando pendiente de ser autorizada (Pago Bizum de doble
+                                                                                                                                                       flujo)
+                                                                                                                                          b.   Denegación:
+                                                                                                                                                    i. Se actualizará el estado de la operación quedando denegada.
+                                                                                                                                 4. Por último, se notificará al comercio con el resultado final de la operación.
+
+                                                                                                                                          5.2.1 Parámetros de entrada
+                                                                                                                             Además de los datos básicos de la operación, para esta integración se precisarán los siguientes
+                                                                                                                             datos de manera obligatoria:
+
+                                                                                                                              Campo                                            Descripción        Tipo          Formato
+
+                                                                                                                              DS_MERCHANT_TRANSACTIONTYPE                      Tipo de            Numérico      ^[\d]{1}$
+                                                                                                                                                                               transacción
+
+                                                                                                                              DS_MERCHANT_PAYMETHODS                           Método de          Cadena        ^z$
+                                                                                                                                                                               pago
+
+                                                                                                                              DS_MERCHANT_BIZUM_MOBILENUMBER                   Teléfono del       Cadena        ^[\+]?[\d]{5,15}$
+                                                                                                                                                                               cliente con
+                                                                                                                                                                                                                Ej: +
+                                                                                                                                                                               prefijo
+                                                                                                                                                                                                                34700000000
+
+
+
+
+                                                                                                                              TPV-Virtual                                           Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                         Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                    Página:15 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                         Fecha: 14/06/2022
+
+
+                                                                                                                              DS_MERCHANT_MERCHANTURL                         URL de              Cadena       URL
+                                                                                                                                                                              notificación
+
+
+
+
+                                                                                                                             Los siguientes parámetros tienen ciertas particularidades:
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                    DS_MERCHANT_TRANSACTIONTYPE: Solo se pueden especificar los siguientes
+                                                                                                                                     valores:
+                                                                                                                                          o   0: En este caso, a la hora de notificar correctamente el inicio de Request To Pay,
+                                                                                                                                              se procederá a autorizar la operación directamente.
+                                                                                                                                          o   7: En este caso, a la hora de notificar correctamente el inicio de Request To Pay,
+                                                                                                                                              se quedará la operación autenticada pero pendiente de ser autorizada, como se
+                                                                                                                                              vio en el apartado 3 de la guía al explicar la integración vía doble flujo.
+
+                                                                                                                                    DS_MERCHANT_MERCHANTURL: Este parámetro es opcional si el comercio tiene
+                                                                                                                                     configurado en el portal de administración el campo de URL de Notificación. En caso de
+                                                                                                                                     no estar configurada a nivel de terminal, debe especificarse en cada llamada.
+                                                                                                                             Como en cualquier tipo de integración REST, el comercio debe enviar una petición POST con los
+                                                                                                                             siguientes parámetros:
+
+                                                                                                                                    Ds_MerchantParameters: Datos de la petición de pago codificados en Base64.
+
+                                                                                                                                    Ds_SignatureVersion: Versión del algoritmo de firma.
+                                                                                                                                    Ds_Signature: Firma generada con los datos de pago.
+
+
+                                                                                                                             La URL de donde está expuesto el servicio para el entorno de test es:
+
+                                                                                                                                    https://sis-t.redsys.es:25443/sis/rest/trataPeticionREST
+
+                                                                                                                                          5.2.2 Parámetros de salida
+                                                                                                                             En este caso, diferenciaremos la respuesta a la solicitud de inicio de RTP y la notificación enviada
+                                                                                                                             posteriormente cuando conozcamos el estado de la operación en caso de que el inicio haya sido
+                                                                                                                             satisfactorio.
+                                                                                                                             Para la respuesta a la solicitud, los parámetros más importantes son los siguientes:
+
+                                                                                                                              Campo                                      Descripción            Tipo          Formato
+
+                                                                                                                              Ds_Response                                Respuesta de la        Numérico      ^[\d]{4}$
+                                                                                                                                                                         petición
+
+                                                                                                                              Ds_RtpResponse                             Respuesta del          Cadena        ^BIZ[\d]{5}$
+                                                                                                                                                                         inicio RTP
+
+
+
+
+                                                                                                                              TPV-Virtual                                          Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                      Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                   Página:16 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                      Fecha: 14/06/2022
+
+
+                                                                                                                              Ds_RtpDescription                          Descripción del     Cadena        ^.{1,255}$
+                                                                                                                                                                         inicio RTP
+
+                                                                                                                             Respecto a la respuesta de la notificación, será una notificación normal como se recibiría en una
+                                                                                                                             integración por redirección.
+
+
+
+                                                                                                                                            5.2.3 Ejemplo
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                             De esta manera podemos generar el siguiente ejemplo:
+
+                                                                                                                                       Datos de pago (Ds_MerchantParameters antes de codificar en base64):
+                                                                                                                              {
+                                                                                                                                      "DS_MERCHANT_ORDER": "1614092745",
+                                                                                                                                      "DS_MERCHANT_MERCHANTCODE": "999008881",
+                                                                                                                                      "DS_MERCHANT_TERMINAL": "871",
+                                                                                                                                      "DS_MERCHANT_CURRENCY": "978",
+                                                                                                                                      "DS_MERCHANT_AMOUNT": "145",
+                                                                                                                                      "DS_MERCHANT_TRANSACTIONTYPE": "0",
+                                                                                                                                      "DS_MERCHANT_PAYMETHODS": "z",
+                                                                                                                                  "DS_MERCHANT_MERCHANTURL": "https:\/\/sis-d.redsys.es\/sis-simulador-
+                                                                                                                              web\/notificacion\/reciboNotif.jsp",
+                                                                                                                                      "DS_MERCHANT_BIZUM_MOBILENUMBER": "+34717003409"
+                                                                                                                              }
+
+                                                                                                                                       Datos de la petición a enviar:
+                                                                                                                              {
+                                                                                                                                      "Ds_MerchantParameters": "eyJEU19NRVJDSEFOVF9PUkRFUiI6IjE2MTQwOTI3NDUiLCJEU19NR
+                                                                                                                              VJDSEFOVF9NRVJDSEFOVENPREUiOiI5OTkwMDg4ODEiLCJEU19NRVJDSEFOVF9URVJNSU5BTCI6Ijg3MSIs
+                                                                                                                              IkRTX01FUkNIQU5UX0NVUlJFTkNZIjoiOTc4IiwiRFNfTUVSQ0hBTlRfQU1PVU5UIjoiMTQ1IiwiRFNfTUV
+                                                                                                                              SQ0hBTlRfVFJBTlNBQ1RJT05UWVBFIjoiMCIsIkRTX01FUkNIQU5UX1BBWU1FVEhPRFMiOiJ6IiwiRFNfTU
+                                                                                                                              VSQ0hBTlRfTUVSQ0hBTlRVUkwiOiJodHRwczpcL1wvc2lzLWQucmVkc3lzLmVzXC9zaXMtc2ltdWxhZG9yL
+                                                                                                                              XdlYlwvbm90aWZpY2FjaW9uXC9yZWNpYm9Ob3RpZi5qc3AiLCJEU19NRVJDSEFOVF9CSVpVTV9NT0JJTEVO
+                                                                                                                              VU1CRVIiOiIrMzQ3MTcwMDM0MDkifQ==",
+                                                                                                                                      "Ds_Signature": "\/R1zAncprjUW0OacA4POeYuIGaE1IZPNRjmJjURdhlY=",
+                                                                                                                                      "Ds_SignatureVersion": "HMAC_SHA256_V1"
+                                                                                                                              }
+
+                                                                                                                             Esto producirá la siguiente respuesta:
+
+                                                                                                                                       Datos recibidos:
+                                                                                                                              {
+                                                                                                                                      "Ds_SignatureVersion": "HMAC_SHA256_V1",
+                                                                                                                                  "Ds_MerchantParameters": "eyJEc19BbW91bnQiOiIxNDUiLCJEc19DdXJyZW5jeSI6Ijk3OCIsI
+                                                                                                                              kRzX09yZGVyIjoiMTYxNDA5Mjc0NSIsIkRzX01lcmNoYW50Q29kZSI6Ijk5OTAwODg4MSIsIkRzX1Rlcm1p
+                                                                                                                              bmFsIjoiODcxIiwiRHNfUmVzcG9uc2UiOiI5OTk4IiwiRHNfQXV0aG9yaXNhdGlvbkNvZGUiOiIiLCJEc19
+                                                                                                                              UcmFuc2FjdGlvblR5cGUiOiIwIiwiRHNfU2VjdXJlUGF5bWVudCI6IjAiLCJEc19MYW5ndWFnZSI6IjEiLC
+                                                                                                                              JEc19NZXJjaGFudERhdGEiOiIiLCJEc19Qcm9jZXNzZWRQYXlNZXRob2QiOiI2OCIsIkRzX1J0cFJlc3Bvb
+
+
+
+
+                                                                                                                              TPV-Virtual                                         Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                    Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                Página:17 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                     Fecha: 14/06/2022
+
+
+                                                                                                                              nNlIjoiQklaMDAwMDAiLCJEc19SdHBEZXNjcmlwdGlvbiI6Ik9wZXJhY2lvbiByZWFsaXphZGEgY29ycmVj
+                                                                                                                              dGFtZW50ZSJ9",
+                                                                                                                                      "Ds_Signature": "lNFWv8ZqH7DD-ODAjUhiAaoPOqslvN2MkPX8xLPNgI4="
+                                                                                                                              }
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                       Datos decodificados:
+                                                                                                                              {
+                                                                                                                                      "Ds_Amount": "145",
+                                                                                                                                      "Ds_Currency": "978",
+                                                                                                                                      "Ds_Order": "1614092745",
+                                                                                                                                      "Ds_MerchantCode": "999008881",
+                                                                                                                                      "Ds_Terminal": "871",
+                                                                                                                                      "Ds_Response": "9998",
+                                                                                                                                      "Ds_AuthorisationCode": "",
+                                                                                                                                      "Ds_TransactionType": "0",
+                                                                                                                                      "Ds_SecurePayment": "0",
+                                                                                                                                      "Ds_Language": "1",
+                                                                                                                                      "Ds_MerchantData": "",
+                                                                                                                                      "Ds_ProcessedPayMethod": "68",
+                                                                                                                                      "Ds_RtpResponse": "BIZ00000",
+                                                                                                                                      "Ds_RtpDescription": "Operacion realizada correctamente"
+                                                                                                                              }
+
+
+
+
+                                                                                                                             Cuando finalice el RTP, se mandará la siguiente notificación:
+
+                                                                                                                                       Datos recibidos:
+                                                                                                                              {
+                                                                                                                                      "Ds_SignatureVersion": "HMAC_SHA256_V1",
+                                                                                                                                      "Ds_MerchantParameters": "eyJEc19EYXRlIjoiMjMlMkYwMiUyRjIwMjEiLCJEc19Ib3VyIjoiM
+                                                                                                                              TYlM0EwNyIsIkRzX1NlY3VyZVBheW1lbnQiOiIxIiwiRHNfQ2FyZF9OdW1iZXIiOiI5NzI0MDIwMTUwMDAw
+                                                                                                                              MjU5IiwiRHNfQW1vdW50IjoiMTQ1IiwiRHNfQ3VycmVuY3kiOiI5NzgiLCJEc19PcmRlciI6IjE2MTQwOTI
+                                                                                                                              3NDUiLCJEc19NZXJjaGFudENvZGUiOiI5OTkwMDg4ODEiLCJEc19UZXJtaW5hbCI6Ijg3MSIsIkRzX1Jlc3
+                                                                                                                              BvbnNlIjoiMDAwMCIsIkRzX01lcmNoYW50RGF0YSI6IiIsIkRzX1RyYW5zYWN0aW9uVHlwZSI6IjAiLCJEc
+                                                                                                                              19Db25zdW1lckxhbmd1YWdlIjoiMSIsIkRzX0F1dGhvcmlzYXRpb25Db2RlIjoiMTIzNDU2IiwiRHNfUHJv
+                                                                                                                              Y2Vzc2VkUGF5TWV0aG9kIjoiNjgifQ==",
+                                                                                                                                      "Ds_Signature": " /nFD81QSFIk2cxQAyNW5z6bwk+2GbdHUIvoMdukBzyc="
+                                                                                                                              }
+
+                                                                                                                                       Datos decodificados:
+                                                                                                                              {
+
+
+
+
+                                                                                                                              TPV-Virtual                                          Guía de Integración BIZUM comercios SIS
+                                                                                                                             Referencia: RS.TE.CEL.MAN.0033                                           Versión: 1.6
+                                                                                                                             Autor: Redsys                                                       Página:18 de 26
+                                                                                                                             Área propietaria: Comercio Electrónico                            Fecha: 14/06/2022
+
+
+                                                                                                                                 "Ds_Date": "23%2F02%2F2021",
+                                                                                                                                 "Ds_Hour": "16%3A07",
+                                                                                                                                 "Ds_SecurePayment": "1",
+                                                                                                                                 "Ds_Card_Number": "9724020150000259",
+                                                                                                                                 "Ds_Amount": "145",
+                                                                                                                                 "Ds_Currency": "978",
+                                                                                                                                 "Ds_Order": "1614092745",
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                 "Ds_MerchantCode": "999008881",
+                                                                                                                                 "Ds_Terminal": "871",
+                                                                                                                                 "Ds_Response": "0000",
+                                                                                                                                 "Ds_MerchantData": "",
+                                                                                                                                 "Ds_TransactionType": "0",
+                                                                                                                                 "Ds_ConsumerLanguage": "1",
+                                                                                                                                 "Ds_AuthorisationCode": "123456",
+                                                                                                                                 "Ds_ProcessedPayMethod": "68"
+                                                                                                                             }
+
+
+
+
+                                                                                                                             TPV-Virtual                                 Guía de Integración BIZUM comercios SIS
+                                                                                                                             Referencia: RS.TE.CEL.MAN.0033                                                         Versión: 1.6
+                                                                                                                             Autor: Redsys                                                                     Página:19 de 26
+                                                                                                                             Área propietaria: Comercio Electrónico                                          Fecha: 14/06/2022
+
+
+                                                                                                                                         5.3          Códigos de error asociados
+                                                                                                                             Código          DESCRIPCIÓN
+                                                                                                                             BIZ00000        Operación realizada correctamente.
+                                                                                                                             BIZ00001        Parámetro de entrada obligatorio no completado.
+                                                                                                                             BIZ00002        El formato de algún parámetro es incorrecto.
+                                                                                                                             BIZ00003        No se encontró el elemento.
+                                                                                                                             BIZ00005        Error interno del sistema.
+                                                                                                                             BIZ00006        Error de seguridad 3DES o MAC X9.19
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                             BIZ00007        Operación no permitida.
+                                                                                                                             BIZ00008        Beneficiario no encontrado.
+                                                                                                                             BIZ00009        Ordenante no encontrado.
+                                                                                                                             BIZ00202        Funcionalidad aún no implementada.
+                                                                                                                             BIZ00213        Error de autenticación en la petición recibida. Fallo en secuencia de seguridad.
+                                                                                                                             BIZ00224        La respuesta de la entidad a la autenticación por RTP es KO.
+                                                                                                                             BIZ00225        La autenticación por request to pay no ha finalizado con éxito.
+
+
+
+
+                                                                                                                             TPV-Virtual                                           Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                              Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                        Página:20 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                            Fecha: 14/06/2022
+
+
+                                                                                                                                               Realización de pruebas – Integración REST
+
+                                                                                                                             Para probar las diferentes casuísticas, puede hacerse uso del teléfono de pruebas +34700000000
+                                                                                                                             haciendo operaciones con diferentes importes
+                                                                                                                              Importe            Cliente       Cliente   Resultado    Descripción en            Descripción en
+                                                                                                                                                 con           con RTP   operación    consulta de RTP           pago REST
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                                 Bizum
+                                                                                                                              Inferior a 5€      OK            OK        OK           Recibimos    que     el   En la petición inicial,
+                                                                                                                                                                                      teléfono usuario tiene    recibimos respuesta de
+                                                                                                                                                                                      activo RTP                que ha ido OK. Al
+                                                                                                                                                                                                                revisar la operación,
+                                                                                                                                                                                                                veremos      que        se
+                                                                                                                                                                                                                autentica.
+                                                                                                                              Entre 5€ y 10€     OK            OK        KO           Recibimos que el          En la petición inicial,
+                                                                                                                                                                                      teléfono usuario tiene    recibimos respuesta de
+                                                                                                                                                                                      activo RTP                que ha ido OK. Al
+                                                                                                                                                                                                                revisar la operación,
+                                                                                                                                                                                                                veremos      que        se
+                                                                                                                                                                                                                deniega.
+                                                                                                                              Entre 10€ y        OK            KO        -            Recibimos que el          En la petición inicial,
+                                                                                                                                                                                      teléfono usuario no       recibimos respuesta de
+                                                                                                                              15€
+                                                                                                                                                                                      tiene activo RTP          que ha ido KO. El
+                                                                                                                                                                                                                motivo de error es
+                                                                                                                                                                                                                BIZ00202.
+                                                                                                                              Superior a 15€     KO            KO        -            Recibimos que el          En la petición inicial,
+                                                                                                                                                                                      teléfono usuario no       recibimos respuesta de
+                                                                                                                                                                                      tiene activo BIZUM        que ha ido KO. El
+                                                                                                                                                                                                                motivo de error es
+                                                                                                                                                                                                                BIZ00209.
+
+
+
+
+                                                                                                                              TPV-Virtual                                            Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                           Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                      Página:21 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                          Fecha: 14/06/2022
+
+
+                                                                                                                                               Otras funcionalidades REST
+
+                                                                                                                                          7.1         Devolución sin original
+                                                                                                                             Este tipo de operación permitirá al comercio realizar abonos a sus titulares en concepto de, por
+                                                                                                                             ejemplo, una bonificación, un pago de apuestas, etc.
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                          7.1.1 Parámetros de entrada
+                                                                                                                             Además de los datos básicos de la operación, para esta integración se precisarán los siguientes
+                                                                                                                             datos de manera obligatoria:
+
+                                                                                                                              Campo                                            Descripción         Tipo          Formato
+
+                                                                                                                              DS_MERCHANT_TRANSACTIONTYPE                      Tipo de             Numérico      ^34$
+                                                                                                                                                                               transacción
+
+                                                                                                                              DS_MERCHANT_PAYMETHODS                           Método de           Cadena        ^z$
+                                                                                                                                                                               pago
+
+                                                                                                                              DS_MERCHANT_BIZUM_MOBILENUMBER                   Teléfono del        Cadena        ^[\+]?[\d]{5,15}$
+                                                                                                                                                                               cliente con
+                                                                                                                                                                                                                 Ej: +
+                                                                                                                                                                               prefijo
+                                                                                                                                                                                                                 34700000000
+
+
+
+                                                                                                                             Como en cualquier tipo de integración REST, el comercio debe enviar una petición POST con los
+                                                                                                                             siguientes parámetros:
+
+                                                                                                                                    Ds_MerchantParameters: Datos de la petición de pago codificados en Base64.
+
+                                                                                                                                    Ds_SignatureVersion: Versión del algoritmo de firma.
+                                                                                                                                    Ds_Signature: Firma generada con los datos de pago.
+
+
+                                                                                                                             La URL de donde está expuesto el servicio para el entorno de test es:
+
+                                                                                                                                    https://sis-t.redsys.es:25443/sis/rest/trataPeticionREST
+
+                                                                                                                                          7.1.2 Parámetros de salida
+                                                                                                                             Para la respuesta a la solicitud, se obtendrá la típica respuesta de una petición REST al TPV-Virtual,
+                                                                                                                             dónde el parámetro más importante es el siguiente:
+
+
+
+
+                                                                                                                              Campo                                       Descripción           Tipo           Formato
+
+
+
+
+                                                                                                                              TPV-Virtual                                           Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                      Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                   Página:22 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                     Fecha: 14/06/2022
+
+
+                                                                                                                              Ds_Response                                Respuesta de la      Numérico    ^[\d]{4}$
+                                                                                                                                                                         petición. El valor
+                                                                                                                                                                         “0900” indica que
+                                                                                                                                                                         la operación ha
+                                                                                                                                                                         sido autorizada.
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                            7.1.3 Ejemplo
+                                                                                                                             De esta manera podemos generar el siguiente ejemplo:
+
+                                                                                                                                       Datos de pago (Ds_MerchantParameters antes de codificar en base64):
+                                                                                                                              {
+                                                                                                                                      "DS_MERCHANT_ORDER": "1614092745",
+                                                                                                                                      "DS_MERCHANT_MERCHANTCODE": "999008881",
+                                                                                                                                      "DS_MERCHANT_TERMINAL": "871",
+                                                                                                                                      "DS_MERCHANT_CURRENCY": "978",
+                                                                                                                                      "DS_MERCHANT_AMOUNT": "145",
+                                                                                                                                      "DS_MERCHANT_TRANSACTIONTYPE": "34",
+                                                                                                                                      "DS_MERCHANT_PAYMETHODS": "z",
+                                                                                                                                      "DS_MERCHANT_BIZUM_MOBILENUMBER": "+34717003409"
+                                                                                                                              }
+
+                                                                                                                                       Datos de la petición a enviar:
+                                                                                                                              {
+                                                                                                                                      "Ds_MerchantParameters": "eyJEU19NRVJDSEFOVF9PUkRFUiI6IjE2MTQwOTI3NDUiLCJEU19NR
+                                                                                                                              VJDSEFOVF9NRVJDSEFOVENPREUiOiI5OTkwMDg4ODEiLCJEU19NRVJDSEFOVF9URVJNSU5BTCI6Ijg3MSIs
+                                                                                                                              IkRTX01FUkNIQU5UX0NVUlJFTkNZIjoiOTc4IiwiRFNfTUVSQ0hBTlRfQU1PVU5UIjoiMTQ1IiwiRFNfTUV
+                                                                                                                              SQ0hBTlRfVFJBTlNBQ1RJT05UWVBFIjoiMCIsIkRTX01FUkNIQU5UX1BBWU1FVEhPRFMiOiJ6IiwiRFNfTU
+                                                                                                                              VSQ0hBTlRfTUVSQ0hBTlRVUkwiOiJodHRwczpcL1wvc2lzLWQucmVkc3lzLmVzXC9zaXMtc2ltdWxhZG9yL
+                                                                                                                              XdlYlwvbm90aWZpY2FjaW9uXC9yZWNpYm9Ob3RpZi5qc3AiLCJEU19NRVJDSEFOVF9CSVpVTV9NT0JJTEVO
+                                                                                                                              VU1CRVIiOiIrMzQ3MTcwMDM0MDkifQ==",
+                                                                                                                                      "Ds_Signature": "S9mVV6misDwt3CjMai0gQd/YMsOpEnOh1VTvz5P4Tnc=",
+                                                                                                                                      "Ds_SignatureVersion": "HMAC_SHA256_V1"
+                                                                                                                              }
+
+
+
+
+                                                                                                                             Esto producirá la siguiente respuesta:
+
+                                                                                                                                       Datos recibidos:
+                                                                                                                              {
+
+
+
+
+                                                                                                                              TPV-Virtual                                          Guía de Integración BIZUM comercios SIS
+                                                                                                                             Referencia: RS.TE.CEL.MAN.0033                                                 Versión: 1.6
+                                                                                                                             Autor: Redsys                                                              Página:23 de 26
+                                                                                                                             Área propietaria: Comercio Electrónico                                   Fecha: 14/06/2022
+
+
+                                                                                                                                     "Ds_SignatureVersion": "HMAC_SHA256_V1",
+                                                                                                                                     "Ds_MerchantParameters": "eyJEc19BbW91bnQiOiIxNDUiLCJEc19DdXJyZW5jeSI6Ijk3OCIsI
+                                                                                                                             kRzX09yZGVyIjoiMTYxNDA5Mjc0NSIsIkRzX01lcmNoYW50Q29kZSI6Ijk5OTAwODg4MSIsIkRzX1Rlcm1p
+                                                                                                                             bmFsIjoiODcxIiwiRHNfUmVzcG9uc2UiOiIwOTAwIiwiRHNfQXV0aG9yaXNhdGlvbkNvZGUiOiIyOTQ1NTg
+                                                                                                                             iLCJEc19UcmFuc2FjdGlvblR5cGUiOiJZIiwiRHNfU2VjdXJlUGF5bWVudCI6IjAiLCJEc19MYW5ndWFnZS
+                                                                                                                             I6IjEiLCJEc19Qcm9jZXNzZWRQYXlNZXRob2QiOiI2OCJ9",
+                                                                                                                                     "Ds_Signature": "h8PON9hTH9iY0Rb3zZbq_xTs5klJkrm3PymBpyi7v70="
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                             }
+
+
+
+                                                                                                                                      Datos decodificados:
+                                                                                                                             {
+                                                                                                                                     "Ds_Amount": "145",
+                                                                                                                                     "Ds_Currency": "978",
+                                                                                                                                     "Ds_Order": "1614092745",
+                                                                                                                                     "Ds_MerchantCode": "999008881",
+                                                                                                                                     "Ds_Terminal": "871",
+                                                                                                                                     "Ds_Response": "0900",
+                                                                                                                                     "Ds_AuthorisationCode": "294558",
+                                                                                                                                     "Ds_TransactionType": "Y",
+                                                                                                                                     "Ds_SecurePayment": "0",
+                                                                                                                                     "Ds_Language": "1",
+                                                                                                                                     "Ds_ProcessedPayMethod": "68",
+                                                                                                                             }
+
+
+
+
+                                                                                                                             TPV-Virtual                                      Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                        Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                    Página:24 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                         Fecha: 14/06/2022
+
+
+                                                                                                                                               Gestión de operaciones Bizum desde el Portal de
+                                                                                                                                               Administración del TPV- Virtual
+
+                                                                                                                             El portal de Administración del TPV-Virtual permite realizar las operativas de consulta y devolución
+                                                                                                                             de las operaciones de Bizum.
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                                          8.1         Consulta de Operaciones de Bizum
+                                                                                                                             Desde la opción de consulta de operaciones del Portal de Administración del TPV-Virtual, se puede
+                                                                                                                             obtener el detalle de las operaciones de Bizum. En el apartado “Opciones” haciendo click en el
+                                                                                                                             icono de Bizum se mostrará el detalle de la operación, tal y como se muestra en la siguiente imagen:
+
+
+
+
+                                                                                                                              TPV-Virtual                                          Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                      Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                  Página:25 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                       Fecha: 14/06/2022
+
+
+                                                                                                                                          8.2         Devolución de Operaciones de Bizum
+                                                                                                                             Desde la opción de consulta de operaciones del Portal de Administración del TPV-Virtual, se
+                                                                                                                             permite realizar la devolución de las operaciones de Bizum, siempre y cuando el usuario del Portal
+                                                                                                                             tenga el permiso para realizar devoluciones. En el apartado “Opciones” haciendo click en el icono
+                                                                                                                             de “Doble Flecha” se abre un pop-up para especificar los datos de la devolución, tal y como se
+                                                                                                                             muestra en la siguiente imagen:
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                             Una vez especificado el importe que se desea devolver, le aparecerá un cuadro de confirmación
+                                                                                                                             de la operación, tal y como se muestra en la siguiente imagen:
+
+
+
+
+                                                                                                                              TPV-Virtual                                         Guía de Integración BIZUM comercios SIS
+                                                                                                                              Referencia: RS.TE.CEL.MAN.0033                                                        Versión: 1.6
+                                                                                                                              Autor: Redsys                                                                    Página:26 de 26
+                                                                                                                              Área propietaria: Comercio Electrónico                                         Fecha: 14/06/2022
+
+
+                                                                                                                                               Consultas operativas y de funcionamiento
+
+                                                                                                                             Si tiene alguna consulta referente al TPV Virtual, deberá contactar con la entidad financiera con la
+                                                                                                                             cual opera.
+                                                                                                                             Las consultas relativas a petición de documentación del TPV Virtual, solicitud de datos de alta,
+                                                                                                                             definición de los métodos de pago, consulta de datos de configuración del comercio, consultas de
+La propiedad intelectual de este documento pertenece a Redsys. Queda prohibida su reproducción, venta o cesión a terceros.
+
+
+
+
+                                                                                                                             usuarios de comercio... deberán ser siempre dirigidas a su entidad financiera.
+                                                                                                                             Asimismo, el centro de atención al cliente de REDSYS no engloba la prestación de servicios de
+                                                                                                                             consultoría (consultas acerca del código a desarrollar para conectarse al TPV Virtual).
+
+
+
+
+                                                                                                                              TPV-Virtual                                          Guía de Integración BIZUM comercios SIS
+

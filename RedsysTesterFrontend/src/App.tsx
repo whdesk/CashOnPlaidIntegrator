@@ -1,6 +1,7 @@
 import React from 'react'
 import RedsysAddCardWithVerify from './components/RedsysAddCardWithVerify'
 import RedsysInSiteUnified from './components/RedsysInSiteUnified'
+import RedsysBizumRedirect from './components/RedsysBizumRedirect'
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <p>Tokenizar tarjeta y realizar cobro con token (MIT).</p>
       <RedsysAddCardWithVerify />
       <RedsysInSiteUnified />
+      <RedsysBizumRedirect />
     </div>
   )
 }
